@@ -12,7 +12,18 @@ import {
   createUser,
   findUserByUsername,
   toPublicUser,
+  updateUserById,
 } from './users.js'
+import { downloadPostImage, localPostImagePath } from '../scripts/lib/download-post-image.mjs'
+import multer from 'multer'
+import {
+  AVATARS_DIR,
+  avatarPublicUrl,
+  ensureAvatarsDir,
+  extFromMime,
+  isAllowedImage,
+  removeUserAvatars,
+} from './avatar.js'
 
 dotenv.config()
 
@@ -27,6 +38,20 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
+
+ensureAvatarsDir()
+
+const avatarUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter(_req, file, cb) {
+    if (!isAllowedImage(file.mimetype)) {
+      cb(new Error('Only JPEG, PNG, WebP, or GIF images are allowed'))
+      return
+    }
+    cb(null, true)
+  },
+})
 
 function loadLocales() {
   try {
@@ -216,6 +241,9 @@ app.post('/api/auth/register', async (req, res) => {
     if (error.code === 'USERNAME_TAKEN' || error.code === 'EMAIL_TAKEN') {
       return res.status(409).json({ error: error.message })
     }
+    if (error.code === 11000) {
+      return res.status(409).json({ error: 'That email or username is already in use.' })
+    }
     console.error(error)
     res.status(500).json({ error: 'Registration failed' })
   }
@@ -255,6 +283,76 @@ app.get('/api/profile/me', authMiddleware, async (req, res) => {
   }
 })
 
+app.patch('/api/profile/me', authMiddleware, async (req, res) => {
+  try {
+    await connectDb()
+    const { preferences, settings, displayName, avatarUrl } = req.body
+    const user = await updateUserById(req.auth.userId, {
+      preferences,
+      settings,
+      displayName,
+      avatarUrl,
+    })
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
+    res.json(user)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Failed to update profile' })
+  }
+})
+
+app.post('/api/profile/me/avatar', authMiddleware, (req, res, next) => {
+  avatarUpload.single('avatar')(req, res, (err) => {
+    if (err instanceof multer.MulterError && err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ error: 'Image must be 2 MB or smaller' })
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message })
+    }
+    next()
+  })
+}, async (req, res) => {
+  try {
+    await connectDb()
+    if (!req.file) {
+      return res.status(400).json({ error: 'No image uploaded' })
+    }
+
+    const userId = req.auth.userId
+    const ext = extFromMime(req.file.mimetype)
+    removeUserAvatars(userId)
+    ensureAvatarsDir()
+    fs.writeFileSync(path.join(AVATARS_DIR, `${userId}${ext}`), req.file.buffer)
+
+    const avatarUrl = avatarPublicUrl(userId, ext)
+    const user = await updateUserById(userId, { avatarUrl })
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
+    res.json(user)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: error.message || 'Failed to upload avatar' })
+  }
+})
+
+app.delete('/api/profile/me/avatar', authMiddleware, async (req, res) => {
+  try {
+    await connectDb()
+    removeUserAvatars(req.auth.userId)
+    const user = await updateUserById(req.auth.userId, { avatarUrl: null })
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
+    res.json(user)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Failed to remove avatar' })
+  }
+})
+
 app.get('/api/profile/:username', async (req, res) => {
   try {
     await connectDb()
@@ -281,6 +379,56 @@ app.get('/api/trending', async (req, res) => {
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Failed to load trending' })
+  }
+})
+
+async function findPostById(postId) {
+  try {
+    const doc = await postsCollection().findOne({ $or: [{ postId }, { id: postId }] })
+    if (doc) return stripMongoFields(doc)
+  } catch {
+    // fall through
+  }
+  return loadTrendingFromFile().find((p) => p.id === postId) || null
+}
+
+app.get('/api/posts/:id/image', async (req, res) => {
+  try {
+    const postId = req.params.id
+    let local = localPostImagePath(postId)
+
+    if (!local) {
+      const post = await findPostById(postId)
+      if (post?.image || post?.videoUrl) {
+        local = await downloadPostImage(postId, post.image, { videoUrl: post.videoUrl })
+        if (local && post.imageLocal !== local) {
+          try {
+            await connectDb()
+            await postsCollection().updateOne(
+              { $or: [{ postId }, { id: postId }] },
+              { $set: { imageLocal: local } },
+            )
+          } catch {
+            // non-fatal
+          }
+        }
+      }
+    }
+
+    if (!local) {
+      return res.status(404).json({ error: 'Image not available' })
+    }
+
+    const filePath = path.resolve(__dirname, '../../client/public', local.replace(/^\//, ''))
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Image file missing' })
+    }
+
+    res.setHeader('Cache-Control', 'public, max-age=604800')
+    res.sendFile(filePath)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Failed to load image' })
   }
 })
 

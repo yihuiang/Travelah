@@ -14,7 +14,9 @@
     "pretranslate": "node scripts/pretranslate-trending.mjs",
     "seed:mongodb": "node scripts/seed-mongodb.mjs",
     "seed:users": "node scripts/seed-users.mjs",
-    "seed:places": "node scripts/seed-places.mjs"
+    "seed:places": "node scripts/seed-places.mjs",
+    "cache:post-images": "node scripts/cache-post-images.mjs",
+    "enrich:places-google": "node scripts/enrich-places-google.mjs"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
@@ -24,6 +26,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.16.0"
+    "mongodb": "^6.16.0",
+    "multer": "^2.1.1"
   }
 }

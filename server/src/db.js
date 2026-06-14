@@ -6,11 +6,28 @@ const dbName = process.env.MONGODB_DB || 'travelah'
 let client
 let db
 
+let indexesEnsured = false
+
+export async function ensureUserIndexes() {
+  const col = getDb().collection('users')
+  const indexes = await col.indexes()
+  if (indexes.some((idx) => idx.name === 'userId_1')) {
+    await col.dropIndex('userId_1')
+    console.log('Dropped legacy users.userId index')
+  }
+  await col.createIndex({ username: 1 }, { unique: true })
+  await col.createIndex({ email: 1 }, { unique: true, sparse: true })
+}
+
 export async function connectDb() {
   if (db) return db
   client = new MongoClient(uri)
   await client.connect()
   db = client.db(dbName)
+  if (!indexesEnsured) {
+    await ensureUserIndexes()
+    indexesEnsured = true
+  }
   return db
 }
 

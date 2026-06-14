@@ -14,7 +14,7 @@ const STATE_FROM_KEYWORD = [
   { pattern: /兰卡威|langkawi/i, state: 'Kedah' },
   { pattern: /马六甲|melaka|malacca/i, state: 'Melaka' },
   { pattern: /柔佛|johor|新山/i, state: 'Johor' },
-  { pattern: /沙巴|sabah|亚庇|仙本那/i, state: 'Sabah' },
+  { pattern: /沙巴|sabah|亚庇|仙本那|kundasang|昆达山|kinabalu|神山|kota\s*kinabalu|\bkk\b/i, state: 'Sabah' },
   { pattern: /砂拉越|sarawak|古晋/i, state: 'Sarawak' },
   { pattern: /登嘉楼|terengganu/i, state: 'Terengganu' },
   { pattern: /吉兰丹|kelantan/i, state: 'Kelantan' },
@@ -81,12 +81,14 @@ export function formatLikes(value) {
   return `🔥 ${raw} likes`
 }
 
-export function inferState({ sourceKeyword, ipLocation, batchLabel }) {
-  const text = `${sourceKeyword || ''} ${ipLocation || ''}`
+export function inferState({ sourceKeyword, ipLocation, batchLabel, title, description }) {
+  const text = `${sourceKeyword || ''} ${ipLocation || ''} ${title || ''} ${description || ''}`
   for (const { pattern, state } of STATE_FROM_KEYWORD) {
     if (pattern.test(text)) return state
   }
   if (batchLabel === 'penang') return 'Penang'
+  if (batchLabel === 'sabah') return 'Sabah'
+  if (batchLabel === 'sarawak') return 'Sarawak'
   if (batchLabel === 'malaysia') return 'Malaysia'
   return 'Malaysia'
 }
@@ -113,9 +115,10 @@ export function normalizeRow(row, index, { batchLabel }) {
     title,
     description,
     image: firstImage(getField(row, 'image_list')),
+    videoUrl: String(getField(row, 'video_url') || '').trim() || undefined,
     location: ipLocation || sourceKeyword || 'Malaysia',
     category: firstTag(tagList, sourceKeyword),
-    state: inferState({ sourceKeyword, ipLocation, batchLabel }),
+    state: inferState({ sourceKeyword, ipLocation, batchLabel, title, description }),
     categories: inferCategories({ title, description, tagList }),
     likes: String(getField(row, 'liked_count') || ''),
     likesScore: parseLikes(getField(row, 'liked_count')),

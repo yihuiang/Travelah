@@ -1,13 +1,14 @@
 {
-  "postsProcessed": 1333,
+  "postsProcessed": 1860,
   "postsSkippedNonMalaysia": 3,
-  "postsWithPlaces": 489,
-  "placeMentions": 771,
-  "uniquePlaces": 739,
+  "postsWithPlaces": 663,
+  "placeMentions": 950,
+  "duplicateBucketsMerged": 65,
+  "uniquePlaces": 834,
   "mentionsBySource": {
-    "pin": 532,
-    "venue": 156,
-    "jalan": 36,
-    "address": 47
+    "pin": 662,
+    "venue": 215,
+    "address": 50,
+    "jalan": 23
   }
 }

@@ -39,14 +39,19 @@ export async function findUserByEmail(email) {
   return usersCollection().findOne({ email: email.toLowerCase() })
 }
 
-export async function createUser({ username, password, email, displayName, avatarUrl, preferences, settings }) {
-  const normalizedUsername = username.trim().toLowerCase()
-  const existing = await findUserByUsername(normalizedUsername)
-  if (existing) {
-    const err = new Error('Username already taken')
-    err.code = 'USERNAME_TAKEN'
-    throw err
+export async function resolveUniqueUsername(preferred) {
+  const base = (preferred || 'traveler').trim().toLowerCase().replace(/\W/g, '') || 'traveler'
+  let candidate = base.slice(0, 30)
+  let suffix = 0
+  while (await findUserByUsername(candidate)) {
+    suffix += 1
+    candidate = `${base.slice(0, 24)}${suffix}`
   }
+  return candidate
+}
+
+export async function createUser({ username, password, email, displayName, avatarUrl, preferences, settings }) {
+  const normalizedUsername = await resolveUniqueUsername(username)
 
   if (email) {
     const emailTaken = await findUserByEmail(email)
@@ -67,7 +72,7 @@ export async function createUser({ username, password, email, displayName, avata
     displayName: displayName?.trim() || normalizedUsername,
     avatarUrl: avatarUrl || null,
     memberSince: now,
-    preferences: preferences || { pace: '', focus: '', dining: '' },
+    preferences: preferences || { pace: [], focus: [], dining: [] },
     settings: settings || { language: 'en-GB', currency: 'MYR' },
     savedItineraries: [],
     createdAt: now,
@@ -82,8 +87,30 @@ export async function findUserById(id) {
   return usersCollection().findOne({ _id: id })
 }
 
-export async function authenticateUser(username, password) {
-  const user = await findUserByUsername(username)
+export async function updateUserById(id, { preferences, settings, displayName, avatarUrl }) {
+  const $set = { updatedAt: new Date() }
+  if (preferences) $set.preferences = preferences
+  if (settings) $set.settings = settings
+  if (displayName !== undefined && displayName !== null) {
+    $set.displayName = displayName.trim()
+  }
+  if (avatarUrl !== undefined) $set.avatarUrl = avatarUrl
+
+  await usersCollection().updateOne({ _id: id }, { $set })
+  const doc = await findUserById(id)
+  return toPublicUser(doc)
+}
+
+export async function findUserByLogin(login) {
+  const normalized = login.trim().toLowerCase()
+  if (normalized.includes('@')) {
+    return findUserByEmail(normalized)
+  }
+  return findUserByUsername(normalized)
+}
+
+export async function authenticateUser(login, password) {
+  const user = await findUserByLogin(login)
   if (!user) {
     const err = new Error('Invalid username or password')
     err.code = 'INVALID_CREDENTIALS'

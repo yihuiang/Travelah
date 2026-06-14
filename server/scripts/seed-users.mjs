@@ -32,6 +32,11 @@ async function main() {
     await client.connect()
     const collection = client.db(dbName).collection('users')
 
+    try {
+      await collection.dropIndex('userId_1')
+    } catch {
+      /* index may not exist */
+    }
     await collection.createIndex({ username: 1 }, { unique: true })
     await collection.createIndex({ email: 1 }, { unique: true, sparse: true })
 
