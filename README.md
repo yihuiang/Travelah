@@ -1,61 +1,32 @@
-# Travelah FYP
+# Travelah — Travel Discovery Platform
 
-Full-stack travel planning application built with **React** (Vite) and **Node.js** (Express).
+NLP-powered travel planning for Malaysia, built from social media place data (RedNote, TikTok, Instagram).
 
-## Project structure
+## Local development
 
-```
-Travelah_FYP/
-├── client/          # React frontend (Vite)
-├── server/          # Node.js API (Express)
-└── package.json     # Root scripts to run both
-```
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) 18 or later
-- npm
-
-## Setup
-
-Install all dependencies (root, client, and server):
-
-```bash
+```powershell
+# Install dependencies
 npm run install:all
-```
 
-Copy the server environment file (optional):
-
-```bash
-copy server\.env.example server\.env
-```
-
-## Run development
-
-Start both frontend and backend together:
-
-```bash
+# Start client (port 3000) + server (port 5000)
 npm run dev
 ```
 
-Or run them separately:
+Copy env files:
 
-```bash
-npm run dev:server   # API at http://localhost:5000
-npm run dev:client   # App at http://localhost:3000
+- `server/.env` ← from `server/.env.example`
+- `client/.env` ← from `client/.env.example`
+
+## Deploy
+
+Vercel hosts `client/`, Railway hosts `server/`, MongoDB Atlas for data, R2 for images. Set Vercel root directory to `client`.
+
+## Update production
+
+```powershell
+git add .
+git commit -m "your message"
+git push
 ```
 
-## API endpoints
-
-| Method | Endpoint            | Description              |
-|--------|---------------------|--------------------------|
-| GET    | `/api/health`       | Health check             |
-| GET    | `/api/destinations` | Sample destination list  |
-
-## Build for production
-
-```bash
-npm run build
-```
-
-The built frontend will be in `client/dist/`.
+Vercel and Railway auto-redeploy from GitHub.
