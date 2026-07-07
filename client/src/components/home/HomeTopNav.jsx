@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { codeToSettingsLanguage, LANGUAGES, useLanguage } from '../../context/LanguageContext.jsx'
@@ -16,6 +16,18 @@ export default function HomeTopNav({ activePage } = {}) {
   const location = useLocation()
   const navigate = useNavigate()
   const [langOpen, setLangOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
 
   const handleLanguageSelect = async (code) => {
     setLanguage(code)
@@ -40,38 +52,72 @@ export default function HomeTopNav({ activePage } = {}) {
   }
 
   return (
-    <nav className="home-topbar">
+    <nav className={`home-topbar${menuOpen ? ' menu-open' : ''}`}>
       <Link to="/" className="nav-logo">
         travelah
       </Link>
+
+      <button
+        type="button"
+        className="nav-menu-toggle"
+        aria-expanded={menuOpen}
+        aria-label={menuOpen ? t('Close menu') : t('Open menu')}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
+      </button>
 
       <ul className="nav-links">
         <li>
           <Link
             to="/explore"
             state={{ resetExplore: true }}
-            onClick={handleExploreClick}
+            onClick={(e) => {
+              handleExploreClick(e)
+              setMenuOpen(false)
+            }}
             className={activePage === 'explore' ? 'active' : ''}
           >
             {ui.explore}
           </Link>
         </li>
         <li>
-          <Link to="/plan" className={activePage === 'plan' ? 'active' : ''}>
+          <Link
+            to="/plan"
+            className={activePage === 'plan' ? 'active' : ''}
+            onClick={() => setMenuOpen(false)}
+          >
             {ui.plan}
           </Link>
         </li>
         <li>
-          <Link to="/trips" className={activePage === 'trips' ? 'active' : ''}>
+          <Link
+            to="/trips"
+            className={activePage === 'trips' ? 'active' : ''}
+            onClick={() => setMenuOpen(false)}
+          >
             {ui.myTrips}
           </Link>
         </li>
         <li>
-          <Link to="/heritage" className={activePage === 'heritage' ? 'active' : ''}>
+          <Link
+            to="/heritage"
+            className={activePage === 'heritage' ? 'active' : ''}
+            onClick={() => setMenuOpen(false)}
+          >
             {ui.heritage}
           </Link>
         </li>
       </ul>
+
+      {menuOpen && (
+        <button
+          type="button"
+          className="nav-menu-backdrop"
+          aria-label={t('Close menu')}
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
 
       <div className="nav-cta">
         <div className="nav-lang-wrap">
