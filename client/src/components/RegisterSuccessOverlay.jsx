@@ -1,35 +1,41 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
+import '../styles/identity-setup-v2.css'
 
 export default function RegisterSuccessOverlay({ open, onDiscover }) {
   const navigate = useNavigate()
-  const { user } = useAuth()
+  const { t } = useLanguage()
 
   if (!open) return null
 
-  const welcomeName = user?.username || user?.displayName || 'traveler'
-
   return (
-    <div className="fixed inset-0 z-[110] bg-primary/20 backdrop-blur-md flex items-center justify-center p-6">
-      <div className="bg-surface p-8 md:p-12 rounded-lg max-w-sm w-full text-center shadow-2xl border border-outline-variant">
-        <div className="w-16 h-16 bg-primary text-on-primary rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="material-symbols-outlined text-[32px]">check</span>
+    <div className="identity-setup-v2">
+      <div className="identity-page-backdrop" aria-hidden="true" />
+      <div className="identity-success-overlay">
+        <div className="identity-success-card">
+          <div className="identity-success-icon">
+            <span className="material-symbols-outlined">check</span>
+          </div>
+          <h2 className="identity-success-title">
+            {t("You're")} <em>{t('all set.')}</em>
+          </h2>
+          <p className="identity-success-sub">
+            {t('Your profile is ready. Start exploring Malaysia with itineraries built around your travel identity.')}
+          </p>
+          <button
+            type="button"
+            className="identity-btn-discover"
+            onClick={() => {
+              if (onDiscover) {
+                onDiscover()
+              } else {
+                navigate('/explore', { replace: true })
+              }
+            }}
+          >
+            {t('Take me to Explore')}
+          </button>
         </div>
-        <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Welcome {welcomeName}</h3>
-        <p className="font-body-md text-on-surface-variant mb-8">
-          Your profile is being prepared for the journey of a lifetime.
-        </p>
-        <button
-          type="button"
-          className="w-full py-3 rounded-full bg-primary text-on-primary font-bold transition-transform active:scale-95"
-          onClick={() => {
-            onDiscover?.()
-            navigate('/explore', { replace: true })
-          }}
-        >
-          Take me to Discover
-        </button>
-        <div className="w-12 h-1 bg-outline-variant/30 rounded-full mx-auto mt-6 animate-pulse" />
       </div>
     </div>
   )

@@ -1,7 +1,36 @@
 /** RedNote CDN links expire and block direct browser hotlinking. */
 
+const R2_PUBLIC_BASE = (import.meta.env.VITE_R2_PUBLIC_URL || '').replace(/\/$/, '')
+
+/** Local public paths (/images, /posts, /places) → R2 CDN when VITE_R2_PUBLIC_URL is set. */
+export function resolvePublicAssetUrl(path) {
+  if (!path) return null
+  if (/^https?:\/\//i.test(path)) return path
+
+  const [pathname, query = ''] = String(path).split('?')
+  const normalized = pathname.startsWith('/') ? pathname : `/${pathname.replace(/^\/+/, '')}`
+
+  const onR2 =
+    R2_PUBLIC_BASE &&
+    (normalized.startsWith('/images/') ||
+      normalized.startsWith('/posts/') ||
+      normalized.startsWith('/places/') ||
+      normalized.startsWith('/avatars/'))
+
+  if (onR2) {
+    const remote = `${R2_PUBLIC_BASE}${encodeURI(normalized)}`
+    return query ? `${remote}?${query}` : remote
+  }
+
+  return path
+}
+
 export function isRedNoteCdn(url) {
   return typeof url === 'string' && /rednotecdn\.com/i.test(url)
+}
+
+export function isInstagramCdn(url) {
+  return typeof url === 'string' && /fbcdn\.net|cdninstagram\.com/i.test(url)
 }
 
 function extractXhsFileId(url) {
@@ -24,10 +53,10 @@ export function resolveXhsImageUrl(imageUrl, { videoUrl } = {}) {
 /** Display URL for a post — prefers local cache, then xhscdn mirror, then API fallback. */
 export function getPostImageUrl(post) {
   if (!post) return null
-  if (post.imageLocal) return post.imageLocal
+  if (post.imageLocal) return resolvePublicAssetUrl(post.imageLocal) || post.imageLocal
 
   const resolved = resolveXhsImageUrl(post.image, { videoUrl: post.videoUrl })
-  if (resolved) return resolved
+  if (resolved && !isInstagramCdn(post.image)) return resolved
 
   const id = post.id || post.postId
   if (id && post.image) return `/api/posts/${id}/image`
@@ -43,6 +72,7 @@ export function getPlaceImageUrl(coverImage) {
     url = `/${url.replace(/^\/+/, '')}`
   }
 
-  if (!isRedNoteCdn(url)) return url
-  return resolveXhsImageUrl(url)
+  const localOrRemote = resolvePublicAssetUrl(url) || url
+  if (!isRedNoteCdn(localOrRemote)) return localOrRemote
+  return resolveXhsImageUrl(localOrRemote)
 }

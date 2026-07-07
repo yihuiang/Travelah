@@ -3,36 +3,54 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AuthModal from '../components/AuthModal.jsx'
 import SocialAuthButtons from '../components/SocialAuthButtons.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import {
-  authCheckboxClass,
-  authDividerLineClass,
-  authInputClass,
-  authLabelClass,
-  authPrimaryBtnClass,
-} from '../styles/authFormClasses.js'
+import { useLanguage } from '../context/LanguageContext.jsx'
+import { needsOnboarding } from '../utils/preferenceSuggestions.js'
+import { persistRememberedLogin, readRememberedLogin } from '../utils/rememberLogin.js'
+
+const rememberedLogin = readRememberedLogin()
 
 export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { login } = useAuth()
+  const { login, loginWithGoogle } = useAuth()
+  const { t } = useLanguage()
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(rememberedLogin.email)
   const [password, setPassword] = useState('')
-  const [remember, setRemember] = useState(true)
+  const [remember, setRemember] = useState(rememberedLogin.remember)
   const [showPassword, setShowPassword] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [googleSubmitting, setGoogleSubmitting] = useState(false)
   const [error, setError] = useState(null)
 
-  const from = location.state?.from?.pathname || '/profile'
   const modalState = { background: location.state?.background, from: location.state?.from }
+
+  function goAfterAuth(user) {
+    if (needsOnboarding(user)) {
+      navigate('/register', {
+        replace: true,
+        state: { ...modalState, onboarding: true },
+      })
+      return
+    }
+    navigate('/', { replace: true })
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
     setError(null)
+
+    if (!email.trim() || !password) {
+      setError('Please fill in all fields.')
+      return
+    }
+
     setSubmitting(true)
     try {
-      await login(email, password, remember)
-      navigate(from, { replace: true })
+      const trimmedEmail = email.trim()
+      const user = await login(trimmedEmail, password, remember)
+      persistRememberedLogin({ remember, email: trimmedEmail })
+      goAfterAuth(user)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -40,128 +58,148 @@ export default function LoginPage() {
     }
   }
 
+  async function handleGoogleSuccess(credential) {
+    setError(null)
+    setGoogleSubmitting(true)
+    try {
+      const { user } = await loginWithGoogle(credential, remember)
+      persistRememberedLogin({ remember, email: user?.email || email.trim() })
+      goAfterAuth(user)
+    } catch (err) {
+      if (err.code === 'ACCOUNT_NOT_FOUND' && err.googleEmail) {
+        navigate('/register', {
+          replace: true,
+          state: {
+            ...modalState,
+            googleSignup: {
+              email: err.googleEmail,
+              displayName: err.googleDisplayName || '',
+            },
+          },
+        })
+        return
+      }
+      setError(err.message)
+    } finally {
+      setGoogleSubmitting(false)
+    }
+  }
+
   return (
-    <AuthModal imageAlt="Batu Caves, Malaysia">
-      <div className="text-center space-y-2 mb-8">
-        <h1 className="font-headline-lg text-headline-lg text-primary tracking-tight">travelah</h1>
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          Welcome back. Please enter your details.
-        </p>
+    <AuthModal>
+      <div className="auth-view-signin">
+      <p className="auth-logo">travelah</p>
+      <div className="auth-eyebrow">
+        <div className="auth-eyebrow-dot" />
+        <span className="auth-eyebrow-text">{t('Welcome back')}</span>
       </div>
+      <h1 className="auth-title">
+        {t('Sign in to')} <em>{t('continue.')}</em>
+      </h1>
+      <p className="auth-subtitle">{t('Pick up your itineraries right where you left off.')}</p>
 
-      <form className="space-y-5" onSubmit={handleSubmit}>
-        {error && (
-          <p className="text-error font-body-md text-center bg-error-container/30 rounded-full py-2 px-4">
-            {error}
-          </p>
-        )}
+      {error && (
+        <p className="form-error show" role="alert">
+          <span className="material-symbols-outlined">error</span>
+          <span>{error}</span>
+        </p>
+      )}
 
-        <div>
-          <label className={authLabelClass} htmlFor="email">
-            Email Address
+      <form onSubmit={handleSubmit}>
+        <div className="field-group">
+          <label className="field-label" htmlFor="signin-email">
+            {t('Email')}
           </label>
           <input
-            className={authInputClass}
-            id="email"
+            className="field-input"
+            type="email"
+            id="signin-email"
             name="email"
-            placeholder="name@example.com"
-            required
-            type="text"
+            placeholder="you@example.com"
             autoComplete="username"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        <div>
-          <label className={authLabelClass} htmlFor="password">
-            Password
+        <div className="field-group">
+          <label className="field-label" htmlFor="signin-pw">
+            {t('Password')}
           </label>
-          <div className="relative">
+          <div className="password-wrap">
             <input
-              className={`${authInputClass} pr-12`}
-              id="password"
+              className="field-input"
+              type={showPassword ? 'text' : 'password'}
+              id="signin-pw"
               name="password"
               placeholder="••••••••"
-              required
-              type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="absolute right-6 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors"
               type="button"
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              className="btn-toggle-pw"
               onClick={() => setShowPassword((v) => !v)}
+              aria-label={showPassword ? t('Hide password') : t('Show password')}
             >
-              <span className="material-symbols-outlined text-[20px]">
+              <span className="material-symbols-outlined">
                 {showPassword ? 'visibility_off' : 'visibility'}
               </span>
             </button>
           </div>
         </div>
 
-        <div className="flex items-center justify-between px-2">
-          <label className="flex items-center gap-2 cursor-pointer group">
+        <div className="form-row">
+          <label className="checkbox-label">
             <input
-              className={authCheckboxClass}
               type="checkbox"
+              id="remember-me"
               checked={remember}
               onChange={(e) => setRemember(e.target.checked)}
             />
-            <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">
-              Remember me
-            </span>
+            {t('Remember me')}
           </label>
-          <span className="font-body-md text-body-md text-primary underline decoration-1 underline-offset-4 cursor-not-allowed opacity-70">
-            Forgot Password?
-          </span>
+          <Link to="/forgot-password" state={modalState} className="link-rust">
+            {t('Forgot password?')}
+          </Link>
         </div>
 
-        <button className={authPrimaryBtnClass} type="submit" disabled={submitting}>
-          {submitting ? 'Signing in…' : 'Sign In'}
+        <button
+          type="submit"
+          className={`btn-primary${submitting ? ' loading' : ''}`}
+          disabled={submitting}
+        >
+          <span className="spinner" aria-hidden="true" />
+          <span className="btn-label">{submitting ? t('Signing in…') : t('Sign in')}</span>
         </button>
       </form>
 
-      <div className="relative py-3">
-        <div className="absolute inset-0 flex items-center">
-          <div className={`w-full ${authDividerLineClass}`} />
-        </div>
-        <div className="relative flex justify-center">
-          <span className="bg-background px-4 font-label-caps text-label-caps text-on-surface-variant">
-            OR CONTINUE WITH
-          </span>
-        </div>
+      <div className="divider">
+        <div className="divider-line" />
+        <span className="divider-text">{t('or continue with')}</span>
+        <div className="divider-line" />
       </div>
 
-      <SocialAuthButtons mode="signin" />
+      <SocialAuthButtons
+        compact
+        disabled={submitting || googleSubmitting}
+        onGoogleSuccess={handleGoogleSuccess}
+        onGoogleError={setError}
+      />
 
-      <div className="text-center pt-3">
-        <Link
-          className="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors inline-flex items-center justify-center gap-2 group"
-          to="/explore"
-          replace
-        >
-          Continue as Guest
-          <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
-            arrow_forward
-          </span>
+      <Link to="/explore" className="btn-guest" replace>
+        {t('Continue as guest')} <span className="material-symbols-outlined" style={{ fontSize: 15 }}>arrow_forward</span>
+      </Link>
+
+      <p className="auth-switch">
+        {t('New to TravelAh?')}{' '}
+        <Link to="/register" state={modalState} replace>
+          {t('Create an account')}
         </Link>
-      </div>
-
-      <div className="text-center pt-5">
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          Don&apos;t have an account?{' '}
-          <Link
-            className="text-primary font-bold hover:text-secondary transition-colors underline decoration-1 underline-offset-4"
-            to="/register"
-            state={modalState}
-            replace
-          >
-            Sign Up
-          </Link>
-        </p>
+      </p>
       </div>
     </AuthModal>
   )

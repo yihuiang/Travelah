@@ -17,6 +17,13 @@ export async function ensureUserIndexes() {
   }
   await col.createIndex({ username: 1 }, { unique: true })
   await col.createIndex({ email: 1 }, { unique: true, sparse: true })
+  await col.createIndex({ googleId: 1 }, { unique: true, sparse: true })
+}
+
+export async function ensureTripIndexes() {
+  const col = getDb().collection('trips')
+  await col.createIndex({ userId: 1, createdAt: -1 })
+  await col.createIndex({ userId: 1, updatedAt: -1 })
 }
 
 export async function connectDb() {
@@ -26,6 +33,7 @@ export async function connectDb() {
   db = client.db(dbName)
   if (!indexesEnsured) {
     await ensureUserIndexes()
+    await ensureTripIndexes()
     indexesEnsured = true
   }
   return db
@@ -54,4 +62,28 @@ export function usersCollection() {
 
 export function placesCollection() {
   return getDb().collection('places')
+}
+
+export function locationsCollection() {
+  return getDb().collection('locations')
+}
+
+export function tripsCollection() {
+  return getDb().collection('trips')
+}
+
+export function tripInvitesCollection() {
+  return getDb().collection('tripInvites')
+}
+
+export function conversationsCollection() {
+  return getDb().collection('conversations')
+}
+
+export function heritageCollection() {
+  return getDb().collection('heritage')
+}
+
+export function passwordResetTokensCollection() {
+  return getDb().collection('passwordResetTokens')
 }

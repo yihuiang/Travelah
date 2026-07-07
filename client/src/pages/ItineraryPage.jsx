@@ -1,338 +1,498 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import ItineraryMap from '../components/itinerary/ItineraryMap.jsx'
-import { PENANG_ITINERARY } from '../data/penangItinerary.js'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import HomeTopNav from '../components/home/HomeTopNav.jsx'
+import ItineraryView from '../components/itinerary/ItineraryView.jsx'
+import TravelahLoader from '../components/TravelahLoader.jsx'
+import { useAuth, getAuthToken } from '../context/AuthContext.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
+import { mergePlanMeta } from '../utils/itineraryMeta.js'
+import { destinationsFromTrip } from '../utils/tripDisplay.js'
+import { fetchTrip, updateTripItinerary, saveTrip } from '../utils/tripsApi.js'
 import '../styles/home-v2.css'
 import '../styles/itinerary-v2.css'
 
-function ItineraryTopNav() {
-  return (
-    <nav className="itin-topbar home-topbar">
-      <Link to="/" className="nav-logo">
-        travelah
-      </Link>
-      <ul className="nav-links">
-        <li>
-          <Link to="/explore">Explore</Link>
-        </li>
-        <li>
-          <Link to="/plan">Plan</Link>
-        </li>
-        <li>
-          <Link to="/trips">My Trips</Link>
-        </li>
-      </ul>
-      <div className="nav-actions">
-        <Link to="/plan" className="btn-outline-sm">
-          <span className="material-symbols-outlined">edit</span> Replan
-        </Link>
-        <button type="button" className="btn-pill">
-          <span className="material-symbols-outlined">download</span> Save PDF
-        </button>
-      </div>
-    </nav>
-  )
+function isUsableDestination(value) {
+  const label = String(value || '').trim()
+  return label.length > 0 && label.toLowerCase() !== 'malaysia'
 }
 
-function ActivityTag({ tag }) {
-  const cls = tag.type === 'source' ? 'tag-source' : tag.type === 'tip' ? 'tag-tip' : 'tag-cat'
-  return <span className={`activity-tag ${cls}`}>{tag.label}</span>
-}
-
-function ActivityCard({ activity, saved, onToggleSave }) {
-  return (
-    <div className="activity-card">
-      <div className="activity-time-col">
-        <span className="activity-time-label">{activity.time}</span>
-        <div className="activity-time-icon">
-          <span className="material-symbols-outlined">{activity.icon}</span>
-        </div>
-      </div>
-      <div className="activity-divider" />
-      <div className="activity-body">
-        <p className="activity-name">{activity.name}</p>
-        <p className="activity-note">{activity.note}</p>
-        {activity.tags?.length > 0 && (
-          <div className="activity-tags">
-            {activity.tags.map((tag) => (
-              <ActivityTag key={tag.label} tag={tag} />
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="activity-card-right">
-        {activity.likes && (
-          <div className="activity-likes">
-            <span className="material-symbols-outlined">favorite</span> {activity.likes}
-          </div>
-        )}
-        <button
-          type="button"
-          className={`activity-save${saved ? ' saved' : ''}`}
-          onClick={() => onToggleSave(activity.id)}
-          aria-label={saved ? 'Remove bookmark' : 'Save activity'}
-        >
-          <span className="material-symbols-outlined">{saved ? 'bookmark' : 'bookmark_border'}</span>
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function StayCard({ stay }) {
-  return (
-    <div className="stay-card">
-      <div className="stay-icon">
-        <span className="material-symbols-outlined">hotel</span>
-      </div>
-      <div className="stay-body">
-        <p className="stay-label">Staying tonight</p>
-        <p className="stay-name">{stay.name}</p>
-        <p className="stay-meta">{stay.meta}</p>
-      </div>
-    </div>
-  )
-}
-
-function formatPlanDates(start, end) {
-  if (!start || !end) return null
-  const s = new Date(start)
-  const e = new Date(end)
-  if (Number.isNaN(s.getTime()) || Number.isNaN(e.getTime()) || e <= s) return null
-  const fmt = (d) =>
-    d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' })
-  const nights = Math.round((e - s) / 86400000)
-  const shortFmt = (d) => d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short' })
-  return {
-    range: `${shortFmt(s)}–${shortFmt(e)} ${s.getFullYear()}`,
-    nights,
-    dayCount: nights + 1,
+function expandDestinationList(list) {
+  const expanded = []
+  for (const item of list || []) {
+    const label = String(item || '').trim()
+    if (!label) continue
+    if (/\s*(?:→|->|—|–|➜|»|>)\s*|\s+\band\b\s+|\s+then\s+|\s*&\s*/i.test(label)) {
+      expanded.push(...destinationsFromTrip({ location: `${label}, Malaysia` }))
+      continue
+    }
+    if (isUsableDestination(label)) expanded.push(label)
   }
+  return expanded
+}
+
+function isValidItinerary(data) {
+  return Boolean(
+    data?.days?.length > 0 &&
+      data.days.some((day) => Array.isArray(day.activities) && day.activities.length > 0),
+  )
+}
+
+function planFromSavedTrip(trip) {
+  const destinations = destinationsFromTrip(trip)
+  const destination = destinations.length > 1 ? destinations.join(' → ') : destinations[0] || ''
+  return {
+    tripId: trip.id,
+    location: trip.location || null,
+    title: trip.title || null,
+    destination,
+    destinations,
+    startDate: trip.startDate || null,
+    endDate: trip.endDate || null,
+    vibes: trip.vibes || [],
+    pace: trip.pace || 'balanced',
+    budget: trip.budget || 'mid',
+    daysPerDestination: trip.daysPerDestination || null,
+    vibeLabels: trip.vibeLabels || trip.description || null,
+    paceLabel: trip.paceLabel || null,
+    budgetLabel: trip.budgetLabel || null,
+    packingList: Array.isArray(trip.packingList) ? trip.packingList : [],
+    budgetItems: Array.isArray(trip.budgetItems) ? trip.budgetItems : [],
+    budgetCurrency: trip.budgetCurrency || null,
+  }
+}
+
+function resolveGenerateDestinations(plan, savedTrip) {
+  const candidates = []
+  const add = (list) => {
+    const normalized = expandDestinationList(list)
+    if (!normalized.length) return
+    const key = normalized.join('\u0001')
+    if (!candidates.some((entry) => entry.join('\u0001') === key)) {
+      candidates.push(normalized)
+    }
+  }
+
+  if (savedTrip) {
+    add(destinationsFromTrip(savedTrip))
+    add(savedTrip.destinations)
+  }
+  add(destinationsFromTrip(plan))
+  add(plan.destinations)
+  if (isUsableDestination(plan.destination)) {
+    add([plan.destination.trim()])
+  }
+  if (plan.title) {
+    add(destinationsFromTrip({ title: plan.title, location: plan.location }))
+  }
+
+  return candidates
+}
+
+async function callGenerate(destinations, plan) {
+  const res = await fetch('/api/itinerary/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      destinations,
+      startDate: plan.startDate || null,
+      endDate: plan.endDate || null,
+      vibes: plan.vibes || [],
+      pace: plan.pace || 'balanced',
+      budget: plan.budget || 'mid',
+      daysPerDestination: plan.daysPerDestination?.length ? plan.daysPerDestination : null,
+    }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(data.error || 'Could not load itinerary')
+  if (data.empty) throw new Error(data.message || 'No places found for this destination')
+  return data
+}
+
+async function generateItinerary(plan, savedTrip = null) {
+  const candidateLists = resolveGenerateDestinations(plan, savedTrip)
+  if (!candidateLists.length) {
+    throw new Error('No destination found for this trip. Try replanning from the Plan page.')
+  }
+
+  let lastError = null
+  for (const destinations of candidateLists) {
+    try {
+      return await callGenerate(destinations, plan)
+    } catch (err) {
+      lastError = err
+    }
+  }
+
+  throw lastError || new Error('Could not load itinerary')
 }
 
 export default function ItineraryPage() {
+  const { tripId: tripIdParam } = useParams()
   const location = useLocation()
-  const plan = location.state ?? {}
-  const sectionRefs = useRef([])
-  const [activeDay, setActiveDay] = useState(0)
-  const [savedIds, setSavedIds] = useState(new Set())
+  const navigate = useNavigate()
+  const { token, sessionReady } = useAuth()
+  const { t } = useLanguage()
+  const navState = location.state
+
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const [toast, setToast] = useState('')
+  const [justSaved, setJustSaved] = useState(false)
+  const autoSaveAttemptedRef = useRef(false)
+
+  const tripId = tripIdParam ? decodeURIComponent(tripIdParam) : null
+
+  const navMeta = useMemo(() => {
+    const destinations = navState?.destinations || destinationsFromTrip(navState || {})
+    const destination =
+      navState?.destination ||
+      (destinations.length > 1 ? destinations.join(' → ') : destinations[0] || '')
+    return {
+      title: navState?.title || null,
+      location: navState?.location || null,
+      destination,
+      destinations,
+      startDate: navState?.startDate || null,
+      endDate: navState?.endDate || null,
+      vibes: navState?.vibes || [],
+      pace: navState?.pace || 'balanced',
+      budget: navState?.budget || 'mid',
+      daysPerDestination: navState?.daysPerDestination || null,
+      vibeLabels: navState?.vibeLabels || null,
+      paceLabel: navState?.paceLabel || null,
+      budgetLabel: navState?.budgetLabel || null,
+    }
+  }, [navState])
+
+  const [tripMeta, setTripMeta] = useState(navMeta)
+  const [generated, setGenerated] = useState(() =>
+    !tripId && isValidItinerary(navState?.itinerary) ? navState.itinerary : null,
+  )
+  const [fetchError, setFetchError] = useState(null)
+  const [needsLogin, setNeedsLogin] = useState(false)
+
+  const loadedForRef = useRef(null)
+  const fetchGenRef = useRef(0)
+  const prevTripIdRef = useRef(tripId)
+  const generatedRef = useRef(generated)
+  generatedRef.current = generated
+
+  useEffect(() => {
+    if (prevTripIdRef.current !== tripId) {
+      prevTripIdRef.current = tripId
+      loadedForRef.current = null
+      if (tripId) {
+        setGenerated(null)
+        setFetchError(null)
+        setNeedsLogin(false)
+      }
+    }
+
+    if (!tripId) {
+      loadedForRef.current = null
+      setTripMeta(navMeta)
+
+      if (isValidItinerary(navState?.itinerary)) {
+        setGenerated(navState.itinerary)
+        setFetchError(null)
+        setNeedsLogin(false)
+        return undefined
+      }
+
+      let cancelled = false
+      setFetchError(null)
+
+      ;(async () => {
+        try {
+          const data = await generateItinerary(navMeta)
+          if (!cancelled && isValidItinerary(data)) {
+            setGenerated(data)
+          } else if (!cancelled) {
+            setGenerated(null)
+            setFetchError('Could not generate itinerary for this trip.')
+          }
+        } catch (err) {
+          if (!cancelled) {
+            setGenerated(null)
+            setFetchError(err.message || 'Could not load itinerary')
+          }
+        }
+      })()
+
+      return () => {
+        cancelled = true
+      }
+    }
+
+    if (!sessionReady) {
+      return undefined
+    }
+
+    const authToken = token || getAuthToken()
+    if (!authToken) {
+      setGenerated(null)
+      setNeedsLogin(true)
+      setFetchError(null)
+      return undefined
+    }
+
+    const loadKey = `${authToken}:${tripId}`
+    if (loadedForRef.current === loadKey && isValidItinerary(generatedRef.current)) {
+      return undefined
+    }
+
+    if (loadedForRef.current && loadedForRef.current !== loadKey) {
+      setGenerated(null)
+    }
+
+    const fetchGen = ++fetchGenRef.current
+    let cancelled = false
+    setNeedsLogin(false)
+    setFetchError(null)
+
+    ;(async () => {
+      try {
+        const { res, trip } = await fetchTrip(tripId, authToken)
+
+        if (cancelled || fetchGen !== fetchGenRef.current) return
+
+        if (res.status === 401) {
+          if (!isValidItinerary(generatedRef.current)) {
+            setGenerated(null)
+            setNeedsLogin(true)
+          }
+          return
+        }
+
+        if (res.status === 404) {
+          if (!isValidItinerary(generatedRef.current)) {
+            setGenerated(null)
+            setFetchError('This trip was not found. It may have been deleted or saved under another account.')
+          }
+          return
+        }
+
+        if (!res.ok) {
+          throw new Error(trip.error || 'Could not load trip')
+        }
+
+        const savedPlan = planFromSavedTrip(trip)
+        setTripMeta((prev) => ({ ...prev, ...navMeta, ...savedPlan }))
+
+        if (isValidItinerary(trip.itinerary)) {
+          setGenerated(trip.itinerary)
+          loadedForRef.current = loadKey
+          return
+        }
+
+        const mergedPlan = { ...navMeta, ...savedPlan, tripId }
+        const data = await generateItinerary(mergedPlan, trip)
+        if (cancelled || fetchGen !== fetchGenRef.current) return
+
+        if (isValidItinerary(data)) {
+          setGenerated(data)
+          loadedForRef.current = loadKey
+          await updateTripItinerary(tripId, data, authToken).catch(() => {})
+          return
+        }
+
+        if (!isValidItinerary(generatedRef.current)) {
+          setGenerated(null)
+          setFetchError('Could not build an itinerary for this trip.')
+        }
+      } catch (err) {
+        if (!cancelled && fetchGen === fetchGenRef.current && !isValidItinerary(generatedRef.current)) {
+          setGenerated(null)
+          setFetchError(err.message || 'Could not load itinerary')
+        }
+      }
+    })()
+
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripId, sessionReady, token])
+
+  const planMeta = useMemo(
+    () => ({
+      tripId,
+      ...tripMeta,
+    }),
+    [tripId, tripMeta],
+  )
 
   const itinerary = useMemo(() => {
-    const base = { ...PENANG_ITINERARY }
-    const dest = plan.destination?.trim() || base.destination
-    const dates = formatPlanDates(plan.startDate, plan.endDate)
+    if (!isValidItinerary(generated)) return null
+    return mergePlanMeta({ ...generated }, planMeta)
+  }, [generated, planMeta])
 
-    if (dates) {
-      base.dateRange = dates.range
-      base.nights = dates.nights
-      base.dayCount = dates.dayCount
+  const hasItinerary = isValidItinerary(generated)
+
+  // Save an unsaved (e.g. AI-concierge) itinerary into the user's trips.
+  async function handleSaveTrip({ redirectToTrip = false } = {}) {
+    if (!isValidItinerary(generated) || saving) return false
+    const authToken = token || getAuthToken()
+    if (!authToken) {
+      navigate('/login', { state: { from: location } })
+      return false
     }
-
-    if (plan.vibeLabels && plan.vibeLabels !== '—') {
-      base.vibe = plan.vibeLabels.split(',')[0].trim()
+    const dest =
+      generated.destination || planMeta.destination || (planMeta.destinations || [])[0] || 'Malaysia'
+    setSaving(true)
+    setSaveError('')
+    try {
+      const { res, trip } = await saveTrip(
+        {
+          location: `${dest}, Malaysia`,
+          title: planMeta.title || `${generated.dayCount || generated.days?.length || 1} Days in ${dest}`,
+          description: '',
+          image: generated.coverImage || null,
+          startDate: planMeta.startDate || null,
+          endDate: planMeta.endDate || null,
+          itinerary: generated,
+          destinations: generated.destinations || planMeta.destinations || [dest],
+          vibes: planMeta.vibes || [],
+          pace: planMeta.pace || 'balanced',
+          budget: planMeta.budget || 'mid',
+        },
+        authToken,
+      )
+      if (res.status === 401) {
+        setSaveError(t('Your session expired. Please sign in again to save.'))
+        return false
+      }
+      if (!res.ok) throw new Error(trip.error || 'Could not save trip')
+      setJustSaved(true)
+      setToast(t('Saved to My Trips'))
+      window.setTimeout(() => setToast(''), 3500)
+      if (redirectToTrip && trip?.id) {
+        navigate(`/itinerary/trip/${encodeURIComponent(trip.id)}`, { replace: true })
+      }
+      return true
+    } catch (err) {
+      setSaveError(err.message || 'Could not save trip. Try again.')
+      return false
+    } finally {
+      setSaving(false)
     }
-    if (plan.paceLabel && plan.paceLabel !== '—') {
-      base.pace = `${plan.paceLabel} pace`
-    }
-    if (plan.budgetLabel && plan.budgetLabel !== '—') {
-      base.budget = plan.budgetLabel
-    }
-
-    base.destination = dest
-    return base
-  }, [plan])
-
-  const scrollToDay = (index) => {
-    const el = sectionRefs.current[index]
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    setActiveDay(index)
-  }
-
-  const handlePinClick = (pinNum) => {
-    const index = itinerary.days.findIndex((d) => d.pin === pinNum)
-    if (index >= 0) scrollToDay(index)
-  }
-
-  const toggleSave = (id) => {
-    setSavedIds((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
   }
 
   useEffect(() => {
-    const sections = sectionRefs.current.filter(Boolean)
-    if (sections.length === 0) return undefined
+    if (
+      tripId ||
+      !navState?.autoSave ||
+      !hasItinerary ||
+      justSaved ||
+      saving ||
+      autoSaveAttemptedRef.current
+    ) {
+      return
+    }
+    const authToken = token || getAuthToken()
+    if (!authToken) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = sections.findIndex((s) => s === entry.target)
-            if (idx >= 0) setActiveDay(idx)
-          }
-        })
-      },
-      { rootMargin: '-30% 0px -60% 0px' },
+    autoSaveAttemptedRef.current = true
+    handleSaveTrip({ redirectToTrip: true }).then((ok) => {
+      if (!ok) autoSaveAttemptedRef.current = false
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripId, navState?.autoSave, hasItinerary, justSaved, saving, token])
+
+  const showConciergeSaveHint = Boolean(navState?.fromConcierge && !tripId && !justSaved && !navState?.autoSave)
+
+  const showLoading =
+    !hasItinerary &&
+    (tripId ? !sessionReady || Boolean(token || getAuthToken()) : true)
+
+  if (showLoading) {
+    return (
+      <div className="home-v2 itin-v2 itin-loading-screen min-h-screen">
+        <HomeTopNav activePage="trips" />
+        <TravelahLoader />
+      </div>
     )
+  }
 
-    sections.forEach((s) => observer.observe(s))
-    return () => observer.disconnect()
-  }, [itinerary.days.length])
+  if (needsLogin && !hasItinerary) {
+    return (
+      <div className="home-v2 itin-v2 min-h-screen">
+        <HomeTopNav activePage="trips" />
+        <div className="page-wrap" style={{ padding: '4rem 1.5rem', textAlign: 'center' }}>
+          <p>{t('Sign in to view this saved trip.')}</p>
+          <Link
+            to="/login"
+            state={{ from: location }}
+            className="itin-action primary"
+            style={{ display: 'inline-flex', marginTop: 16 }}
+          >
+            {t('Sign in')}
+          </Link>
+          <Link to="/trips" className="itin-action" style={{ display: 'inline-flex', marginTop: 12, marginLeft: 8 }}>
+            {t('Back to My Trips')}
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
-  const activePin = itinerary.days[activeDay]?.pin ?? 1
+  if (!hasItinerary) {
+    return (
+      <div className="home-v2 itin-v2 min-h-screen">
+        <HomeTopNav activePage="trips" />
+        <div className="page-wrap" style={{ padding: '4rem 1.5rem', textAlign: 'center' }}>
+          <p>{fetchError || t('No itinerary found for this trip.')}</p>
+          <Link to="/plan" className="itin-action primary" style={{ display: 'inline-flex', marginTop: 16 }}>
+            {t('Plan a new trip')}
+          </Link>
+          <Link to="/trips" className="itin-action" style={{ display: 'inline-flex', marginTop: 12, marginLeft: 8 }}>
+            {t('Back to My Trips')}
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="home-v2 itin-v2 min-h-screen">
-      <ItineraryTopNav />
-
-      <div className="itin-hero">
-        <div className="itin-hero-inner">
-          <div>
-            <div className="itin-eyebrow">
-              <div className="itin-eyebrow-dot" />
-              <span className="itin-eyebrow-text">Your itinerary — generated by TravelAh AI</span>
-            </div>
-            <h1 className="itin-headline">
-              {itinerary.dayCount} Days in
-              <br />
-              <em>{itinerary.destination}.</em>
-            </h1>
-            <div className="itin-meta-row">
-              <span className="itin-badge">
-                <span className="material-symbols-outlined">calendar_month</span> {itinerary.dateRange}
-              </span>
-              <span className="itin-badge">
-                <span className="material-symbols-outlined">nights_stay</span> {itinerary.nights} nights
-              </span>
-              <span className="itin-badge highlight">
-                <span className="material-symbols-outlined">museum</span> {itinerary.vibe}
-              </span>
-              <span className="itin-badge">
-                <span className="material-symbols-outlined">coffee</span> {itinerary.pace}
-              </span>
-              <span className="itin-badge">
-                <span className="material-symbols-outlined">account_balance_wallet</span> {itinerary.budget}
-              </span>
-            </div>
-          </div>
-          <div className="itin-hero-right">
-            <button type="button" className="itin-action primary">
-              <span className="material-symbols-outlined">share</span> Share
-            </button>
-            <button type="button" className="itin-action">
-              <span className="material-symbols-outlined">bookmark</span> Save to My Trips
-            </button>
-            <button type="button" className="itin-action">
-              <span className="material-symbols-outlined">download</span> Export PDF
-            </button>
-          </div>
+      <HomeTopNav activePage="trips" />
+      {showConciergeSaveHint && (
+        <div className="itin-concierge-banner" role="status">
+          <span className="material-symbols-outlined">info</span>
+          <p>{t('This itinerary is not saved yet. Sign in and tap Save to My Trips to keep it.')}</p>
         </div>
-      </div>
+      )}
+      <ItineraryView
+        itinerary={itinerary}
+        variant="full"
+        tripId={tripId}
+        planMeta={planMeta}
+        onSaveTrip={!tripId && !justSaved ? () => handleSaveTrip() : undefined}
+        saving={saving}
+        saveError={saveError}
+        onGenerateItinerary={(plan) => generateItinerary(plan)}
+        onTripUpdated={({ trip, itinerary: nextItinerary, planMeta: nextPlanMeta }) => {
+          setGenerated(nextItinerary)
+          setTripMeta((prev) => ({
+            ...prev,
+            ...nextPlanMeta,
+            ...planFromSavedTrip(trip),
+          }))
+        }}
+        onItineraryChange={(updated) => {
+          setGenerated((prev) => (prev ? { ...prev, days: updated.days, stay: updated.stay } : prev))
+        }}
+      />
 
-      <div className="day-selector-wrap">
-        <div className="day-selector" role="tablist" aria-label="Trip days">
-          {itinerary.days.map((day, index) => (
-            <button
-              key={day.id}
-              type="button"
-              role="tab"
-              aria-selected={activeDay === index}
-              className={`day-tab${activeDay === index ? ' active' : ''}`}
-              onClick={() => scrollToDay(index)}
-            >
-              <span className="day-tab-num">Day {day.num}</span>
-              <span className="day-tab-label">{day.tabLabel}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="itin-body">
-        <aside className="day-sidebar">
-          <ItineraryMap activePin={activePin} onPinClick={handlePinClick} />
-          {itinerary.days.map((day, index) => (
-            <button
-              key={day.id}
-              type="button"
-              className={`sidebar-day${activeDay === index ? ' active' : ''}`}
-              onClick={() => scrollToDay(index)}
-            >
-              <div className="sidebar-day-dot">{day.num}</div>
-              <div>
-                <p className="sidebar-day-num">{day.sidebarDate}</p>
-                <p className="sidebar-day-title">{day.sidebarTitle}</p>
-              </div>
-            </button>
-          ))}
-        </aside>
-
-        <div className="day-content">
-          {itinerary.days.map((day, index) => (
-            <section
-              key={day.id}
-              id={day.id}
-              className="day-section"
-              ref={(el) => {
-                sectionRefs.current[index] = el
-              }}
-            >
-              <div className="day-section-header">
-                <div>
-                  <p className="day-section-eyebrow">Day {day.num}</p>
-                  <h2 className="day-section-title">{day.title}</h2>
-                </div>
-                <span className="day-section-date">{day.date}</span>
-              </div>
-
-              <div className="activities">
-                {day.activities.map((item, i) =>
-                  item.connector ? (
-                    <div key={`${day.id}-conn-${i}`} className="travel-connector">
-                      <span className="material-symbols-outlined">arrow_downward</span>
-                      <span className="travel-connector-text">{item.connector}</span>
-                    </div>
-                  ) : (
-                    <ActivityCard
-                      key={item.id}
-                      activity={item}
-                      saved={savedIds.has(item.id)}
-                      onToggleSave={toggleSave}
-                    />
-                  ),
-                )}
-              </div>
-
-              {!day.hideStay && <StayCard stay={itinerary.stay} />}
-            </section>
-          ))}
-        </div>
-      </div>
-
-      <footer className="itin-footer">
-        <div className="itin-footer-inner">
-          <Link to="/" className="itin-footer-logo">
-            travelah
+      {toast && (
+        <div className="itin-toast" role="status">
+          <span className="material-symbols-outlined">check_circle</span>
+          {toast}
+          <Link to="/trips" className="itin-toast-link">
+            {t('View')}
           </Link>
-          <ul className="itin-footer-nav">
-            <li>
-              <Link to="/explore">Destinations</Link>
-            </li>
-            <li>
-              <a href="#heritage">Heritage</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-          <span className="itin-footer-copy">© {new Date().getFullYear()} travelah</span>
         </div>
-      </footer>
+      )}
     </div>
   )
 }

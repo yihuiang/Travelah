@@ -1,0 +1,542 @@
+/* Shared AI Concierge styles — used by both the homepage section and the global
+   floating widget. Unscoped (not under .home-v2) and self-contained colours so
+   they work anywhere on the site. Palette: lime #c8e63a, ink #1a1410, rust #b84a2e. */
+
+/* ---- Toolbar (New chat / History) ---- */
+.ai-chat-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.ai-chat-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 6px 12px 6px 10px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.ai-chat-bar-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.ai-chat-bar-btn.is-active {
+  background: rgba(200, 230, 58, 0.14);
+  border-color: rgba(200, 230, 58, 0.4);
+  color: #fff;
+}
+
+.ai-chat-bar-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* ---- History list ---- */
+.ai-convo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-convo-item {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.ai-convo-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(200, 230, 58, 0.3);
+}
+
+.ai-convo-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 11px 4px 11px 14px;
+  font-family: inherit;
+}
+
+.ai-convo-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-convo-date {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.ai-convo-del {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  border-radius: 0 12px 12px 0;
+  transition: color 0.18s, background 0.18s;
+}
+
+.ai-convo-del:hover {
+  color: #ff7a7a;
+  background: rgba(255, 122, 122, 0.1);
+}
+
+.ai-convo-del .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* ---- Chat thread (message list + input) ---- */
+.ai-chat-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-right: 4px;
+}
+
+.ai-chat-empty {
+  margin: auto 0;
+  text-align: center;
+  padding: 12px;
+}
+
+.ai-chat-empty-icon {
+  font-size: 32px;
+  color: #c8e63a;
+}
+
+.ai-chat-empty-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.ai-chat-empty-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 6px auto 0;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.ai-chat-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.ai-chat-example {
+  font-family: inherit;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.ai-chat-example:hover {
+  background: rgba(200, 230, 58, 0.12);
+  border-color: rgba(200, 230, 58, 0.45);
+  color: #fff;
+}
+
+.ai-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.ai-msg.user {
+  flex-direction: row-reverse;
+}
+
+.ai-msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c8e63a;
+  color: #1a1410;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.ai-msg-bubble {
+  max-width: 82%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 12px 15px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ai-msg.user .ai-msg-bubble {
+  background: #b84a2e;
+  border-color: #b84a2e;
+  color: #fff;
+}
+
+.ai-msg-text {
+  white-space: pre-wrap;
+}
+
+/* Inline itinerary preview card */
+.ai-itin-card {
+  margin-top: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(200, 230, 58, 0.25);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.ai-itin-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #c8e63a;
+}
+
+.ai-itin-head .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.ai-itin-stops {
+  list-style: none;
+  margin: 10px 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ai-itin-stops li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ai-itin-stops .material-symbols-outlined {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.ai-itin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1410;
+  background: #c8e63a;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ai-itin-btn:hover {
+  opacity: 0.85;
+}
+
+/* Typing indicator */
+.ai-typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.ai-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8e63a;
+  opacity: 0.6;
+  animation: concierge-typing 1.2s ease-in-out infinite;
+}
+
+.ai-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes concierge-typing {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Input */
+.ai-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 10px 10px 10px 20px;
+  margin-top: 16px;
+  transition: border-color 0.2s;
+}
+
+.ai-chat-input:focus-within {
+  border-color: rgba(200, 230, 58, 0.5);
+}
+
+.ai-chat-input input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #fff;
+  font-family: inherit;
+}
+
+.ai-chat-input input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+}
+
+.chat-send {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #c8e63a;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1410;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.chat-send:hover {
+  opacity: 0.8;
+}
+
+.chat-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- Floating launcher ---- */
+.concierge-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px 0 16px;
+  border: none;
+  border-radius: 100px;
+  background: #c8e63a;
+  color: #1a1410;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.concierge-launcher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.34);
+}
+
+.concierge-launcher.is-open {
+  width: 52px;
+  padding: 0;
+  justify-content: center;
+  background: #1a1410;
+  color: #fff;
+}
+
+.concierge-launcher .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.concierge-launcher-label {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* ---- Popup ---- */
+.concierge-popup {
+  position: fixed;
+  bottom: 88px;
+  right: 24px;
+  z-index: 1000;
+  width: 384px;
+  max-width: calc(100vw - 32px);
+  height: 560px;
+  max-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  background: #15110d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  animation: concierge-pop-in 0.18s ease-out;
+}
+
+@keyframes concierge-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.concierge-popup-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.concierge-popup-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.concierge-popup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c8e63a;
+  box-shadow: 0 0 0 3px rgba(200, 230, 58, 0.2);
+}
+
+.concierge-popup-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.concierge-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.concierge-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.concierge-icon-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.concierge-popup-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 18px 18px;
+}
+
+@media (max-width: 480px) {
+  .concierge-launcher {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .concierge-popup {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+    height: auto;
+    top: 80px;
+    max-height: none;
+  }
+}

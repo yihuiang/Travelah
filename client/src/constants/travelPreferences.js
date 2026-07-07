@@ -1,13 +1,16 @@
-export const PACE_OPTIONS = ['Leisurely', 'Balanced', 'Active']
+export const PACE_OPTIONS = ['Relaxed', 'Balanced', 'Full-on']
 
-export const FOCUS_OPTIONS = ['Heritage', 'Nature', 'Urban', 'Beach & Islands']
+export const FOCUS_OPTIONS = ['Heritage', 'Nature', 'Food', 'Adventure', 'Markets']
 
-export const DINING_OPTIONS = ['Culinary Arts', 'Local Street Food', 'Fine Dining', 'Casual']
+export const DINING_OPTIONS = ['Culinary Arts', 'Local Street Food']
+
+export const BUDGET_OPTIONS = ['Shoestring', 'Mid-range', 'Splurge']
 
 export const DEFAULT_PREFERENCES = {
   pace: [],
   focus: [],
   dining: [],
+  budget: [],
 }
 
 /** Normalize legacy string values from older accounts */
@@ -22,5 +25,6 @@ export function normalizePreferences(preferences) {
     pace: normalizePreferenceList(preferences?.pace),
     focus: normalizePreferenceList(preferences?.focus),
     dining: normalizePreferenceList(preferences?.dining),
+    budget: normalizePreferenceList(preferences?.budget),
   }
 }

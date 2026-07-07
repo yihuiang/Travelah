@@ -1,14 +1,18 @@
 {
-  "postsProcessed": 1860,
-  "postsSkippedNonMalaysia": 3,
-  "postsWithPlaces": 663,
-  "placeMentions": 950,
-  "duplicateBucketsMerged": 65,
-  "uniquePlaces": 834,
+  "postsProcessed": 91,
+  "postsSkippedNonMalaysia": 4,
+  "postsWithPlaces": 2,
+  "placeMentions": 2,
+  "duplicateBucketsMerged": 0,
+  "uniquePlaces": 2,
   "mentionsBySource": {
-    "pin": 662,
-    "venue": 215,
-    "address": 50,
-    "jalan": 23
+    "pin": 1,
+    "hashtag": 1
+  },
+  "merge": {
+    "added": 2,
+    "merged": 0,
+    "skipped": 0,
+    "total": 1780
   }
 }

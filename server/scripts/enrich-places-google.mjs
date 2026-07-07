@@ -1,21 +1,36 @@
 /**
  * Enrich MongoDB places with Google rating + opening hours (Places API New).
+ * Opening hours: only used when OSM did not provide hours (see opening-hours.mjs).
  *
  * Prerequisites:
  *   1. Enable "Places API (New)" in Google Cloud Console
  *   2. Add GOOGLE_PLACES_API_KEY to server/.env
  *
  * Usage:
- *   npm run enrich:places-google -- --limit 5     # test first
- *   npm run enrich:places-google                  # all un-enriched places
- *   npm run enrich:places-google -- --force       # re-fetch all
+ *   npm run enrich:places-google -- --limit=5
+ *   npm run enrich:places-google
+ *   npm run enrich:places-google -- --force
+ *   npm run enrich:places-google -- --page=2 --missing
+ *   npm run enrich:places-google -- --ids=p_abc,p_def
  */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 import { MongoClient } from 'mongodb'
-import { enrichPlaceFromGoogle } from './lib/google-places.mjs'
+import { enrichPlaceFromGoogle, getPlaceDetails, normalizeGoogleDetails } from './lib/google-places.mjs'
+import {
+  loadEnrichmentStore,
+  mergePlaceIntoStore,
+  placeNeedsGoogleEnrichment,
+  saveEnrichmentStore,
+} from './lib/google-enrichment-store.mjs'
+import {
+  hasOsmDisplayHours,
+  hasOpeningHoursList,
+  resolveDisplayOpeningHours,
+} from './lib/opening-hours.mjs'
+import { filterByIds, parseExploreArgs, sliceExplorePage } from './lib/explore-page.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
@@ -32,9 +47,22 @@ function sleep(ms) {
 
 function parseArgs() {
   const force = process.argv.includes('--force')
+  const missingOnly = process.argv.includes('--missing')
   const limitArg = process.argv.find((a) => a.startsWith('--limit='))
   const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : 0
-  return { force, limit }
+  return { force, missingOnly, limit, ...parseExploreArgs() }
+}
+
+async function fetchGooglePatch(place) {
+  if (place.googlePlaceId) {
+    const details = await getPlaceDetails(apiKey, place.googlePlaceId)
+    return { ok: true, ...normalizeGoogleDetails(details) }
+  }
+  return enrichPlaceFromGoogle(apiKey, place)
+}
+
+function needsPartialEnrichment(place) {
+  return place.googleRating == null || !hasOpeningHoursList(place.openingHours)
 }
 
 async function main() {
@@ -44,7 +72,7 @@ async function main() {
     )
   }
 
-  const { force, limit } = parseArgs()
+  const { force, missingOnly, limit, page, pageSize, ids } = parseArgs()
   const client = new MongoClient(uri)
 
   try {
@@ -52,8 +80,17 @@ async function main() {
     const collection = client.db(dbName).collection('places')
     let places = await collection.find({}).sort({ totalLikes: -1 }).toArray()
 
-    if (!force) {
-      places = places.filter((p) => !p.googleEnrichedAt)
+    const enrichmentStore = loadEnrichmentStore()
+    const scoped = page > 0 || ids.length > 0
+
+    places = filterByIds(places, ids)
+    places = sliceExplorePage(places, { page, pageSize })
+
+    if (!force && !scoped) {
+      places = places.filter((p) => placeNeedsGoogleEnrichment(p, enrichmentStore))
+    }
+    if (missingOnly) {
+      places = places.filter(needsPartialEnrichment)
     }
     if (limit > 0) {
       places = places.slice(0, limit)
@@ -72,7 +109,7 @@ async function main() {
       const place = places[i]
       const label = `${place._id} ${place.name}`
       try {
-        const result = await enrichPlaceFromGoogle(apiKey, place)
+        const result = await fetchGooglePatch(place)
         if (!result.ok) {
           failed += 1
           console.log(`  [${i + 1}/${places.length}] skip — no match: ${label}`)
@@ -83,18 +120,33 @@ async function main() {
           googlePlaceId: result.googlePlaceId,
           googleRating: result.googleRating,
           googleReviewCount: result.googleReviewCount,
-          openingHours: result.openingHours,
           googleMapsUri: result.googleMapsUri,
           googleDescription: result.googleDescription,
           googleEnrichedAt: result.googleEnrichedAt,
         }
+        if (result.openingHours?.length) {
+          patch.googleOpeningHours = result.openingHours
+        }
+        if (!hasOsmDisplayHours(place) && result.openingHours?.length) {
+          patch.openingHours = result.openingHours
+          patch.openingHoursSource = 'google'
+        }
 
-        await collection.updateOne({ _id: place._id }, { $set: patch })
+        const merged = resolveDisplayOpeningHours({ ...place, ...patch })
+
+        await collection.updateOne({ _id: place._id }, { $set: merged })
+        mergePlaceIntoStore(enrichmentStore, merged)
         saved += 1
         const rating = result.googleRating != null ? `${result.googleRating}★` : 'no rating'
+        const hoursNote =
+          merged.openingHoursSource === 'google'
+            ? ', Google hours'
+            : merged.openingHoursSource === 'osm'
+              ? ', kept OSM hours'
+              : ''
         const descNote = result.googleDescription ? ', has description' : ''
         console.log(
-          `  [${i + 1}/${places.length}] ok — ${label} → ${rating} (${result.googleReviewCount ?? 0} reviews${descNote})`,
+          `  [${i + 1}/${places.length}] ok — ${label} → ${rating} (${result.googleReviewCount ?? 0} reviews${descNote}${hoursNote})`,
         )
       } catch (err) {
         failed += 1
@@ -103,6 +155,8 @@ async function main() {
 
       if (i < places.length - 1) await sleep(delayMs)
     }
+
+    saveEnrichmentStore(enrichmentStore)
 
     if (fs.existsSync(placesJsonPath)) {
       const all = await collection.find({}).toArray()

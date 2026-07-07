@@ -1,7 +1,8 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 
 export default function HomeFooter() {
-  const location = useLocation()
+  const { t } = useLanguage()
   const year = new Date().getFullYear()
 
   return (
@@ -12,29 +13,19 @@ export default function HomeFooter() {
         </Link>
         <ul className="footer-nav">
           <li>
-            <a href="#explore">Destinations</a>
+            <Link to="/terms" target="_blank" rel="noopener noreferrer">
+              {t('Terms of Service')}
+            </Link>
           </li>
           <li>
-            <a href="#">Heritage</a>
-          </li>
-          <li>
-            <a href="#">Culture</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-          <li>
-            <Link to="/login" state={{ background: location }} className="btn-pill">
-              Get started
+            <Link to="/privacy" target="_blank" rel="noopener noreferrer">
+              {t('Privacy Policy')}
             </Link>
           </li>
         </ul>
       </div>
       <div className="footer-bottom">
-        <span className="footer-copy">© {year} travelah — crafted for the discerning explorer.</span>
+        <span className="footer-copy">© {year} travelah — {t('crafted for the discerning explorer.')}</span>
         <div className="footer-social">
           <span className="material-symbols-outlined">language</span>
           <span className="material-symbols-outlined">share</span>

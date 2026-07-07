@@ -1,0 +1,691 @@
+{
+  "generatedAt": "2026-06-21T13:15:45.383Z",
+  "totalPlaces": 792,
+  "flaggedCount": 94,
+  "minConfidence": 70,
+  "highConfidenceCount": 697,
+  "mediumConfidenceCount": 2,
+  "lowConfidenceCount": 93,
+  "topIssues": [
+    {
+      "id": "P17",
+      "name": "Desa Dairy Farm",
+      "state": "Sarawak",
+      "postCount": 3,
+      "descriptionSnippet": "/ 前幾個月和朋友們去Sabah旅遊 是我心心念念的Kundasang[皱眉R] 第一次去東馬好興奮哈哈哈 給大家分享這次四天三夜的行程[斜眼R] · Day ❶ ✈️ 亞庇機場 🤤 午餐 - Fa",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "kundasang"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 3,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "66e57b0f000000000c0196cf",
+          "title": "🏔️旅游｜沙巴昆达山亚庇四天三夜旅游攻略",
+          "entities": [
+            "kundasang"
+          ]
+        },
+        {
+          "id": "684b816d0000000021006303",
+          "title": "🇲🇾 这里是马来西亚！！！",
+          "entities": [
+            "kundasang",
+            "kinabalu"
+          ]
+        },
+        {
+          "id": "672dd1d7000000001a037290",
+          "title": "⛰️ 我才知道，原来沙巴还藏着“小新西兰”？",
+          "entities": [
+            "kinabalu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P23",
+      "name": "Katsetiu",
+      "state": "Kuala Lumpur",
+      "postCount": 1,
+      "descriptionSnippet": "📍Katsetiu, Terengganu 原来玻璃海和这种绝美景色不用出国也能看到，甚至比我在国外看到的更美 🥺 我们这趟是从吉隆坡✈️登嘉楼，然后villa安排了司机把我们载到villa，车程",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "6878db06000000002400bba5",
+          "title": "🇲🇾不用出国也有玻璃海 🥹浪漫staycation",
+          "entities": [
+            "redang"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P32",
+      "name": "Sulap II",
+      "state": "Sarawak",
+      "postCount": 1,
+      "descriptionSnippet": "在📕发现了这里的风景绝美 号称 “大马瑞士”🇨🇭随口和朋友说起后就买了机票 满怀期待的开始了这段旅程 [害羞R][哇R] 没住这个名宿 但在经过的时候觉得这里很漂亮 我们忍不住停车就下去拍照了 ",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "kundasang"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "6602dbf8000000001202046c",
+          "title": "🇲🇾 |原来大马也有那么美的地方! ⛰️",
+          "entities": [
+            "kundasang"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P34",
+      "name": "Kopi Harian 我超爱吃他的 + mochi 很香很香",
+      "state": "Melaka",
+      "postCount": 1,
+      "descriptionSnippet": "第二次用 调过了参数 室内拍超有氛围嘻嘻 但是在室外 就会太白太亮～ 第三张是iphone5s 拍的 很古早吧！！ 话说～～ 📍Kopi Harian 我超爱吃他的🍵🧈🍞 + mochi 很香",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "69bc0e96000000002102c21f",
+          "title": "🇲🇾马六甲一日游！带上ccd总是好出片 >ᴗ<✧",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P83",
+      "name": "老板面（SS15分行） No B12",
+      "state": "Johor",
+      "postCount": 1,
+      "descriptionSnippet": "没错～JB超人气老板面终于来到KL啦！🔥现打现做的手工板面不仅好吃价格也很亲民，重点是还吃得到全马首创的咸蛋板面😱 吃面怎么少的了小吃呢？他们家的配面小菜一律只需从RM4.90起！🤩是不是超值得",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "66224506000000000d033612",
+          "title": "🇲🇾 听说吃了这碗面就可以当老板？！😍",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P84",
+      "name": "Eco Botanic",
+      "state": "Johor",
+      "postCount": 1,
+      "descriptionSnippet": "没错～JB超人气老板面终于来到KL啦！🔥现打现做的手工板面不仅好吃价格也很亲民，重点是还吃得到全马首创的咸蛋板面😱 吃面怎么少的了小吃呢？他们家的配面小菜一律只需从RM4.90起！🤩是不是超值得",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "66224506000000000d033612",
+          "title": "🇲🇾 听说吃了这碗面就可以当老板？！😍",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P87",
+      "name": "Desa Daily Farm",
+      "state": "Sabah",
+      "postCount": 1,
+      "descriptionSnippet": "大马的避暑胜地不只有云顶高原和金马伦❌热带小孩今天给大家推推挚爱🥳获“大马小瑞士”一致好价的沙巴昆达山⛰位于京那峇鲁神山脚下，平均温度不超过2⃣0⃣摄氏度❄可以完全沉浸在大自然中吸收疗愈能量💖 ☘",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "genting",
+        "cameron",
+        "kundasang",
+        "kinabalu"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "6650578e000000000c018118",
+          "title": "🇲🇾大马瑞士 | 人就该待在🈚天🌸板的地方",
+          "entities": [
+            "genting",
+            "cameron",
+            "kundasang",
+            "kinabalu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P88",
+      "name": "ascott star kl （level99）",
+      "state": "Kuala Lumpur",
+      "postCount": 1,
+      "descriptionSnippet": "klcc双峰塔拍照超好看的机位 很出片！！！[哇R]💗 还可以近距离看夜景 一边哇哇哇 这里也没什么人.. 可以吃吃晚餐 约约会 很chill 😚 📍ascott star kl （level9",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "67b5727e000000002602c120",
+          "title": "🇲🇾游客照",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P90",
+      "name": "鬼门关 这个地方敲有氛围",
+      "state": "Melaka",
+      "postCount": 1,
+      "descriptionSnippet": "作为一个一年去好几次马六甲的人 尊嘟想分享好多好物好玩的地方😭 这些地方大部分步行都可以到！一个人去也不是问题 （顺嘴一提我感觉马六甲太适合solo trip了！ 好去处👇 📍Geographe",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "68a31ad1000000001c006033",
+          "title": "🇲🇾马六甲City Walk攻略大全📔这样玩敲",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P97",
+      "name": "Charlie cafe",
+      "state": "Melaka",
+      "postCount": 1,
+      "descriptionSnippet": "Day 2 ♡ 12pm check out 12.30pm brunch @Ban Kheng Cafe ☕️ 有室外和室内 室内的设计是复古风 很适合打卡(拍照很出片[自拍R]) 2pm Some",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "687348980000000010027da3",
+          "title": "🇲🇾马六甲2D1N 自驾游攻略🚙💨",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P100",
+      "name": "Kunak Western Food",
+      "state": "Selangor",
+      "postCount": 1,
+      "descriptionSnippet": "RM10超大份炸鸡排套餐🔥😍 📍Kunak Western Food Lorong Raja Khalid, Kampung Melayu Subang, 40150 Shah Alam, Se",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "6789c19a000000002100241e",
+          "title": "RM10超大份炸鸡排套餐🔥😍",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P132",
+      "name": "Burger Sulong",
+      "state": "Pahang",
+      "postCount": 1,
+      "descriptionSnippet": "🇲🇾浓浓蛋液汉堡包🍔🍳 📍Burger Sulong 120, Jalan Bandar Baru 13, Kampung Sungai Jan, 27000 Jerantut, Pahan",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "67dec6bf000000000603adbb",
+          "title": "🇲🇾浓浓蛋液汉堡包🍔🍳\n\t\n📍Burger Sulong\n120, Jalan Bandar Baru 13, Kampung Sungai Jan,",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P145",
+      "name": "ToJoy Cheesy Chicken & Tea",
+      "state": "Selangor",
+      "postCount": 1,
+      "descriptionSnippet": "很久没吃ToJoy了！！！ 真的超级想念奶茶🥤和炸鸡排😭可惜只有巴生有！！！这次奔着爆浆芝士炸鸡排来的🧀还是一样外脆里嫩💥芝士还会爆浆～ 还顺便Try了新品Basmathi Nasi Lema",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "69743144000000002103d196",
+          "title": "🇲🇾RM13.9💰爆浆芝士鸡排💥来巴生必打包‼️",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P151",
+      "name": "TokBah Celup Tepung Viral",
+      "state": "Selangor",
+      "postCount": 1,
+      "descriptionSnippet": "Foodcourt Tasik Biru Seri Kundang, Jalan Tasik Biru 1, Taman Tasik Biru, 48050 Rawang, Selangor ⏰12p",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "666deaaa000000000d00c7d1",
+          "title": "📍TokBah Celup Tepung Viral",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P155",
+      "name": "Sky Walk",
+      "state": "Kuala Lumpur",
+      "postCount": 1,
+      "descriptionSnippet": "如果半夜跟伴侣 / 朋友 / 家人想找点刺激，不妨来 Shah Alam 的 Sky City！✨ 这里有【60米高空水上滑梯】🛝 从顶端冲下来只要 2 分钟，但在上面感觉超级漫长，心跳加速的同时还",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "68d15e8c0000000013018c7a",
+          "title": "🇲🇾 高空水上滑梯｜情侣深夜约会 👫🏻🛝✨",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P161",
+      "name": "Teluk Senangin Beach",
+      "state": "Perak",
+      "postCount": 1,
+      "descriptionSnippet": "📍Teluk Senangin Beach",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "68dabb84000000000b03e46a",
+          "title": "🇲🇾Perak也太多宝藏海滩了吧🏝️🌇",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P188",
+      "name": "Putrajaya Botanical Garden（Taman Bo",
+      "state": "Perak",
+      "postCount": 1,
+      "descriptionSnippet": "📍 Putrajaya Botanical Garden（Taman Botani Putrajaya） ⏰ 每天开放（星期一休园），早上7点到傍晚7点 🎟️ 免费入园 🚗 停车位超多，不用担心",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "686b9aee000000002400e056",
+          "title": "🇲🇾美到像出国的公园 （离KL 30分钟！）",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P194",
+      "name": "Halo Cafe",
+      "state": "Kuala Lumpur",
+      "postCount": 1,
+      "descriptionSnippet": "在金马伦夜市‼️太可爱的甜品，我在吉隆坡都没看过呢。也有好多网红甜品，蘸酱麻薯，车轮饼等等。它的mochi口感和我在KL吃到的不一样，会比较软嫩，好吃😋在金马伦冷冷的天气逛夜市，真的很棒😍到现在还",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "cameron"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "67dea3f6000000000603fd53",
+          "title": "🇲🇾这里的夜市怎么那么多可爱宝藏美食🥹",
+          "entities": [
+            "cameron"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P203",
+      "name": "KLCCPark",
+      "state": "Kuala Lumpur",
+      "postCount": 1,
+      "descriptionSnippet": "Hi，我是你们的@小程哥 东南亚城市旅行当然首选吉隆坡啦，真的好吃又好逛，这份4天3晚保姆级citywalk攻略可以直接抄作业哦 Day1⃣吉隆坡➠双子塔夜景 ➠Pavillion Day2⃣粉色清z",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "genting"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "688c8a33000000002301b11f",
+          "title": "第一次来吉隆坡，4天3晚推荐这16个打卡地",
+          "entities": [
+            "genting"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P217",
+      "name": "ZIKGU",
+      "state": "Melaka",
+      "postCount": 1,
+      "descriptionSnippet": "每次来马六甲都会留肚子给这间美式汉堡[喝奶茶R] 📍 ZIKGU @KAMPUNG HULU",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "65a8f655000000002b014af0",
+          "title": "🇲🇾建议来马六甲吃了它才离开😭没有替代品",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P246",
+      "name": "Artisan Kopitiam",
+      "state": "Sarawak",
+      "postCount": 1,
+      "descriptionSnippet": "趁还没忘记赶紧记录超chill的沙巴之旅✨ 关于租车🚗 我们是在Trevo平台上租的Myvi 3天💰200+ 第[一R]天 📍Artisan Kopitiam&Lounge 第一天一下机就直奔A",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "68384cae000000002203420f",
+          "title": "🇲🇾4天3夜｜沙巴·昆达山·亚庇自驾游⛰️",
+          "entities": [
+            "kundasang",
+            "kinabalu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P251",
+      "name": "图源网络",
+      "state": "Sarawak",
+      "postCount": 1,
+      "descriptionSnippet": "原来不只是西马人没见过，就连很多东马人自己都还没吃过！😳 沙巴和砂拉越的热带雨林，真的太神奇了啦～ 生物多样性超级丰富，养出了很多 du 特水果和蔬菜。 - 🍓 有些外形奇特到你不敢认弟一眼，有些",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "68d0e76f000000000b013644",
+          "title": "东马才有的12种水果/蔬菜 🌴🍍",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P255",
+      "name": "Bidong View Resort",
+      "state": "Sabah",
+      "postCount": 1,
+      "descriptionSnippet": "居然有这种海景度假村？！ 一秒穿越马代＋峇里岛 vibes 的 Bidong View Resort 🌊 谁说疗愈一定要出国？ Best healing place in Terengganu 不是",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "langkawi"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "685617d00000000020019ff1",
+          "title": "🇲🇾登嘉楼｜一秒穿越马代＋峇里岛 vibes",
+          "entities": [
+            "langkawi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P262",
+      "name": "Johor的柔佛苏丹私人小岛-拉哇岛 岛上只有两个度假村",
+      "state": "Johor",
+      "postCount": 1,
+      "descriptionSnippet": "📍位于Johor的柔佛苏丹私人小岛-拉哇岛🏝 岛上只有两个度假村。我入住的是Rawa Island Resort 🛥交通方式: 需要先到Mersing码头。度假村有提供专属停车场，按天计费（约R",
+      "placeEntities": [],
+      "descriptionEntities": [],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "6812eb2d0000000022036152",
+          "title": "🇲🇾天堂般的小众私人海岛Rawa Island",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "id": "P310",
+      "name": "Day 2 - desa diary farm",
+      "state": "Sarawak",
+      "postCount": 1,
+      "descriptionSnippet": "🌼Day 1 - 午餐 Notungkusan Cafe 新鲜鱼面🐟 - Tamparuli大吊桥 - 开车到kundasang - 中途路边 Sinalau Bakas 🐷烟熏山猪肉 - Na",
+      "placeEntities": [],
+      "descriptionEntities": [
+        "kundasang"
+      ],
+      "descriptionMismatch": false,
+      "confidence": 15,
+      "flags": [
+        "low_post_match_ratio",
+        "irrelevant_posts_linked"
+      ],
+      "linkedCount": 0,
+      "totalCount": 1,
+      "matchRatio": 0,
+      "irrelevantSamples": [
+        {
+          "id": "676d92310000000013009f62",
+          "title": "🇲🇾 沙巴KK |昆达山 壮观的神山⛰️",
+          "entities": [
+            "kundasang",
+            "kinabalu"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "aurelia|Selangor": {
+    "openingHours": [
+      "Monday: 10:00 AM – 5:00 PM",
+      "Tuesday: 10:00 AM – 5:00 PM",
+      "Wednesday: 10:00 AM – 5:00 PM",
+      "Thursday: 10:00 AM – 5:00 PM",
+      "Friday: 10:00 AM – 5:00 PM",
+      "Saturday: 10:00 AM – 5:00 PM",
+      "Sunday: 10:00 AM – 5:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T07:49:42.750Z",
+    "openingHoursSource": "osm"
+  },
+  "austin heights golf & hotel resort|Johor": {
+    "osmMatchName": "1 Million Hotel @ Austin Heights",
+    "osmEnrichedAt": "2026-07-05T14:24:54.428Z"
+  },
+  "cove resort|Johor": {
+    "osmMatchName": "Sebana Cove Resort",
+    "osmEnrichedAt": "2026-07-05T14:48:17.378Z"
+  },
+  "else hotel|Kuala Lumpur": {
+    "osmMatchName": "JW Marriott Hotel Kuala Lumpur",
+    "osmEnrichedAt": "2026-07-05T16:39:09.515Z"
+  },
+  "five5 hotel|Johor": {
+    "osmMatchName": "Hotel Seri Malaysia",
+    "osmEnrichedAt": "2026-07-05T14:15:08.484Z"
+  },
+  "forest city beach|Johor": {
+    "osmMatchName": "Forest City",
+    "osmEnrichedAt": "2026-07-05T14:12:57.616Z"
+  },
+  "gamuda cove|Selangor": {
+    "openingHours": [
+      "Monday: 9:00 AM – 5:00 PM",
+      "Tuesday: 9:00 AM – 5:00 PM",
+      "Wednesday: Closed",
+      "Thursday: 9:00 AM – 5:00 PM",
+      "Friday: 9:00 AM – 5:00 PM",
+      "Saturday: 9:00 AM – 5:00 PM",
+      "Sunday: 9:00 AM – 5:00 PM"
+    ],
+    "osmMatchName": "Gamuda Cove",
+    "osmEnrichedAt": "2026-06-29T08:21:41.872Z",
+    "openingHoursSource": "osm"
+  },
+  "hard rock hotel|Johor": {
+    "osmMatchName": "Hard Rock Hotel Desaru Coast",
+    "osmEnrichedAt": "2026-07-05T13:51:20.276Z"
+  },
+  "hounon ridge farmstay|Sabah": {
+    "openingHours": [
+      "Monday: 8:00 AM – 5:00 PM",
+      "Tuesday: 8:00 AM – 5:00 PM",
+      "Wednesday: 8:00 AM – 5:00 PM",
+      "Thursday: 8:00 AM – 5:00 PM",
+      "Friday: 8:00 AM – 5:00 PM",
+      "Saturday: 8:00 AM – 5:00 PM",
+      "Sunday: 10:00 AM – 5:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T07:39:15.486Z",
+    "openingHoursSource": "osm"
+  },
+  "ikan emas coffee|Kuala Lumpur": {
+    "osmMatchName": "Taman Ikan Emas",
+    "osmEnrichedAt": "2026-07-05T16:51:51.818Z"
+  },
+  "jalan tan hiok nee|Johor": {
+    "osmMatchName": "Jalan Tan Hiok Nee",
+    "osmEnrichedAt": "2026-07-05T14:02:35.738Z"
+  },
+  "kelab tasik putrajaya|Putrajaya": {
+    "osmMatchName": "Kelab Tasik Putrajaya",
+    "osmEnrichedAt": "2026-07-06T03:16:18.657Z"
+  },
+  "konunukan garden & camping ground|Sabah": {
+    "openingHours": [
+      "Monday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Tuesday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Wednesday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Thursday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Friday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Saturday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM",
+      "Sunday: 2:00 PM – 10:00 PM (check-in), Check-out by 12:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T07:58:13.900Z",
+    "openingHoursSource": "osm"
+  },
+  "kuala lumpur city gallery|Kuala Lumpur": {
+    "openingHours": [
+      "09:00-18:30",
+      "Tuesday: off"
+    ],
+    "osmOpeningHours": "09:00-18:30; Tu off",
+    "osmId": "node/4283481889",
+    "osmMatchName": "Kuala Lumpur City Gallery",
+    "osmEnrichedAt": "2026-07-05T16:57:03.258Z",
+    "openingHoursSource": "osm"
+  },
+  "kundasang|Sabah": {
+    "openingHours": [
+      "Monday: 8:30 AM – 5:00 PM",
+      "Tuesday: 8:30 AM – 5:00 PM",
+      "Wednesday: 8:30 AM – 5:00 PM",
+      "Thursday: 8:30 AM – 5:00 PM",
+      "Friday: 8:30 AM – 5:00 PM",
+      "Saturday: 8:30 AM – 5:00 PM",
+      "Sunday: 8:30 AM – 5:00 PM"
+    ],
+    "osmMatchName": "Kundasang",
+    "osmEnrichedAt": "2026-06-29T08:17:46.697Z",
+    "openingHoursSource": "osm"
+  },
+  "le meridien hotel|Kuala Lumpur": {
+    "osmMatchName": "To Hilton & Le Meridien",
+    "osmEnrichedAt": "2026-07-05T16:56:59.372Z"
+  },
+  "localista by tyra & co|Kuala Lumpur": {
+    "osmMatchName": "Tyra & Co Accessories",
+    "osmEnrichedAt": "2026-07-05T16:33:55.217Z"
+  },
+  "mantanani island|Sabah": {
+    "osmMatchName": "Big Mantanani Island",
+    "osmEnrichedAt": "2026-07-05T15:37:03.072Z"
+  },
+  "mengalum island|Sabah": {
+    "osmMatchName": "Mengalum Island",
+    "osmEnrichedAt": "2026-07-05T15:25:29.299Z"
+  },
+  "mohammad chow chinese muslim kitchen|Selangor": {
+    "openingHours": [
+      "Monday: 11:00 AM – 11:00 PM",
+      "Tuesday: 11:00 AM – 11:00 PM",
+      "Wednesday: 11:00 AM – 11:00 PM",
+      "Thursday: 11:00 AM – 11:00 PM",
+      "Friday: 11:00 AM – 11:00 PM",
+      "Saturday: 11:00 AM – 11:00 PM",
+      "Sunday: 11:00 AM – 11:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T08:03:37.894Z",
+    "openingHoursSource": "osm"
+  },
+  "muse peranakan bistro|Melaka": {
+    "openingHours": [
+      "Monday: 12:00 – 10:00 PM",
+      "Tuesday: 12:00 – 10:00 PM",
+      "Wednesday: 12:00 – 10:00 PM",
+      "Thursday: 12:00 – 10:00 PM",
+      "Friday: 12:00 – 10:00 PM",
+      "Saturday: 12:00 – 10:00 PM",
+      "Sunday: 12:00 – 10:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T08:03:40.255Z",
+    "openingHoursSource": "osm"
+  },
+  "nanas village resort|Johor": {
+    "osmMatchName": "Southern Village Resort",
+    "osmEnrichedAt": "2026-07-05T14:25:59.203Z"
+  },
+  "nextgen theme park|Selangor": {
+    "openingHours": [
+      "Monday: 10:00 AM – 10:00 PM",
+      "Tuesday: 10:00 AM – 10:00 PM",
+      "Wednesday: 10:00 AM – 10:00 PM",
+      "Thursday: 10:00 AM – 10:00 PM",
+      "Friday: 10:00 AM – 10:00 PM",
+      "Saturday: 10:00 AM – 10:00 PM",
+      "Sunday: 10:00 AM – 10:00 PM"
+    ],
+    "osmMatchName": "I-City Theme Park",
+    "osmEnrichedAt": "2026-07-02T07:44:26.795Z",
+    "openingHoursSource": "osm"
+  },
+  "pantai penyabung endau|Johor": {
+    "osmMatchName": "Kampung Penyabung",
+    "osmEnrichedAt": "2026-07-05T14:12:02.706Z"
+  },
+  "penjara ayer molek|Johor": {
+    "osmMatchName": "Galeri Penjara Ayer Molek",
+    "osmEnrichedAt": "2026-07-05T14:30:16.355Z"
+  },
+  "perhentian|Terengganu": {
+    "openingHours": [
+      "Monday: Open 24 hours",
+      "Tuesday: Open 24 hours",
+      "Wednesday: Open 24 hours",
+      "Thursday: Open 24 hours",
+      "Friday: Open 24 hours",
+      "Saturday: Open 24 hours",
+      "Sunday: Open 24 hours"
+    ],
+    "osmMatchName": "Greater Perhentian Island",
+    "osmEnrichedAt": "2026-07-04T06:18:01.932Z",
+    "openingHoursSource": "osm"
+  },
+  "permaisuri zarith sofiah opera house|Johor": {
+    "osmMatchName": "Permaisuri Zarith Sofiah Opera House",
+    "osmEnrichedAt": "2026-07-05T14:32:25.172Z"
+  },
+  "pulau aur|Johor": {
+    "osmMatchName": "Aur Island",
+    "osmEnrichedAt": "2026-07-05T14:07:45.683Z"
+  },
+  "putrajaya lake|Putrajaya": {
+    "openingHours": [
+      "Monday–Sunday: 10:00-22:00"
+    ],
+    "osmOpeningHours": "Mo-Su 10:00-22:00",
+    "osmId": "way/608790899",
+    "osmMatchName": "Skyrides Putrajaya",
+    "osmEnrichedAt": "2026-07-06T03:25:51.366Z",
+    "openingHoursSource": "osm"
+  },
+  "qhouse eco botanic|Johor": {
+    "osmMatchName": "Eco Botanic",
+    "osmEnrichedAt": "2026-07-05T14:37:40.273Z"
+  },
+  "royal water village resort|Sabah": {
+    "osmMatchName": "Sipadan Water Village Resort Jetty",
+    "osmEnrichedAt": "2026-07-05T15:32:03.847Z"
+  },
+  "seri gemilang bridge|Putrajaya": {
+    "osmMatchName": "Seri Gemilang Bridge",
+    "osmEnrichedAt": "2026-07-06T03:20:32.333Z"
+  },
+  "sheraton hotel|Kuala Lumpur": {
+    "osmMatchName": "Sheraton Imperial Kuala Lumpur Hotel",
+    "osmEnrichedAt": "2026-07-05T17:02:18.399Z"
+  },
+  "skybar|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: 12:00 PM – 1:00 AM",
+      "Tuesday: 12:00 PM – 1:00 AM",
+      "Wednesday: 12:00 PM – 1:00 AM",
+      "Thursday: 12:00 PM – 1:00 AM",
+      "Friday: 12:00 PM – 2:00 AM",
+      "Saturday: 12:00 PM – 2:00 AM",
+      "Sunday: 12:00 PM – 1:00 AM"
+    ],
+    "osmEnrichedAt": "2026-07-02T07:33:58.888Z",
+    "openingHoursSource": "osm"
+  },
+  "st. giles boulevard hotel|Kuala Lumpur": {
+    "osmMatchName": "The Boulevard St. Giles Premier Hotel",
+    "osmEnrichedAt": "2026-07-05T16:44:19.616Z"
+  },
+  "starus hotel|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: Open 24 hours",
+      "Tuesday: Open 24 hours",
+      "Wednesday: Open 24 hours",
+      "Thursday: Open 24 hours",
+      "Friday: Open 24 hours",
+      "Saturday: Open 24 hours",
+      "Sunday: Open 24 hours"
+    ],
+    "osmMatchName": "Starus",
+    "osmEnrichedAt": "2026-07-02T08:03:29.682Z",
+    "openingHoursSource": "osm"
+  },
+  "talula hill farm resort|Johor": {
+    "openingHours": [
+      "Public holidays, Monday–Sunday: 12:00-18:00"
+    ],
+    "osmOpeningHours": "PH,Mo-Su 12:00-18:00",
+    "osmId": "node/10294674447",
+    "osmMatchName": "Talula Hill Farm Shop",
+    "osmEnrichedAt": "2026-07-05T14:32:28.439Z",
+    "openingHoursSource": "osm"
+  },
+  "taman awam bbkp|Johor": {
+    "osmMatchName": "Taman Awam BBKP",
+    "osmEnrichedAt": "2026-07-05T14:19:43.645Z"
+  },
+  "taman connaught night market|Kuala Lumpur": {
+    "openingHours": [
+      "Wednesday: 16:00-00:00"
+    ],
+    "osmOpeningHours": "We 16:00-00:00",
+    "osmId": "way/819563849",
+    "osmMatchName": "Pasar Malam Taman Connaught",
+    "osmEnrichedAt": "2026-06-29T08:13:32.343Z",
+    "openingHoursSource": "osm"
+  },
+  "tanjung aru beach|Sabah": {
+    "openingHours": [
+      "Monday: 10:00 AM – 11:00 PM",
+      "Tuesday: 10:00 AM – 11:00 PM",
+      "Wednesday: 10:00 AM – 11:00 PM",
+      "Thursday: 10:00 AM – 11:00 PM",
+      "Friday: 10:00 AM – 11:00 PM",
+      "Saturday: 10:00 AM – 11:00 PM",
+      "Sunday: 10:00 AM – 11:00 PM"
+    ],
+    "osmMatchName": "Tanjung Aru Beach",
+    "osmEnrichedAt": "2026-07-02T07:09:34.370Z",
+    "openingHoursSource": "osm"
+  },
+  "tg's bistro|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: Open 24 hours",
+      "Tuesday: Open 24 hours",
+      "Wednesday: Open 24 hours",
+      "Thursday: Open 24 hours",
+      "Friday: Open 24 hours",
+      "Saturday: Open 24 hours",
+      "Sunday: Open 24 hours"
+    ],
+    "osmMatchName": "tg's Bistro",
+    "osmEnrichedAt": "2026-07-02T08:07:55.710Z",
+    "openingHoursSource": "osm"
+  },
+  "titiwangsa lake gardens|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: 6:00 AM – 7:00 PM",
+      "Tuesday: 6:00 AM – 7:00 PM",
+      "Wednesday: 6:00 AM – 7:00 PM",
+      "Thursday: 6:00 AM – 7:00 PM",
+      "Friday: 6:00 AM – 7:00 PM",
+      "Saturday: 6:00 AM – 7:00 PM",
+      "Sunday: 6:00 AM – 7:00 PM"
+    ],
+    "osmMatchName": "Titiwangsa Lake Park",
+    "osmEnrichedAt": "2026-06-29T08:18:43.552Z",
+    "openingHoursSource": "osm"
+  },
+  "titiwangsa park|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: 6:00 AM – 7:00 PM",
+      "Tuesday: 6:00 AM – 7:00 PM",
+      "Wednesday: 6:00 AM – 7:00 PM",
+      "Thursday: 6:00 AM – 7:00 PM",
+      "Friday: 6:00 AM – 7:00 PM",
+      "Saturday: 6:00 AM – 7:00 PM",
+      "Sunday: 6:00 AM – 7:00 PM"
+    ],
+    "osmMatchName": "Titiwangsa Lake Park",
+    "osmEnrichedAt": "2026-07-02T07:47:23.736Z",
+    "openingHoursSource": "osm"
+  },
+  "traders hotel|Kuala Lumpur": {
+    "osmMatchName": "Traders Hotel",
+    "osmEnrichedAt": "2026-07-05T16:30:39.272Z"
+  },
+  "travelodge hotel|Kuala Lumpur": {
+    "osmMatchName": "Travelodge City Centre",
+    "osmEnrichedAt": "2026-07-05T16:52:57.248Z"
+  },
+  "tunku abdul rahman national park|Sabah": {
+    "osmMatchName": "Tunku Abdul Rahman National Park",
+    "osmEnrichedAt": "2026-07-05T15:21:21.390Z"
+  },
+  "villa samadhi|Kuala Lumpur": {
+    "osmMatchName": "Villa Samadhi Kuala Lumpur",
+    "osmEnrichedAt": "2026-07-05T16:45:41.069Z"
+  },
+  "xuan cafe|Johor": {
+    "osmMatchName": "Pin Ming Xuan Cantonese Dim Sum",
+    "osmEnrichedAt": "2026-07-05T13:54:59.775Z"
+  },
+  "york hotel|Johor": {
+    "osmMatchName": "New York Hotel",
+    "osmEnrichedAt": "2026-07-05T14:42:59.852Z"
+  },
+  "zing sunset bar|Sabah": {
+    "openingHours": [
+      "Monday: 4:00 PM – 12:30 AM",
+      "Tuesday: 4:00 PM – 12:30 AM",
+      "Wednesday: 4:00 PM – 12:30 AM",
+      "Thursday: 4:00 PM – 12:30 AM",
+      "Friday: 4:00 PM – 12:30 AM",
+      "Saturday: 4:00 PM – 12:30 AM",
+      "Sunday: 4:00 PM – 12:30 AM"
+    ],
+    "osmOpeningHours": "17:00-20:00",
+    "osmId": "node/9564971374",
+    "osmMatchName": "Sunset Bar",
+    "osmEnrichedAt": "2026-07-02T08:03:36.273Z",
+    "openingHoursSource": "osm"
+  },
+  "半山芭巴刹|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: Closed",
+      "Tuesday: 10:30 AM – 6:30 PM",
+      "Wednesday: 10:30 AM – 6:30 PM",
+      "Thursday: 10:30 AM – 6:30 PM",
+      "Friday: 11:00 AM – 7:00 PM",
+      "Saturday: 10:30 AM – 6:30 PM",
+      "Sunday: 10:30 AM – 12:00 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T07:39:12.185Z",
+    "openingHoursSource": "osm"
+  },
+  "米其林餐厅|Kuala Lumpur": {
+    "openingHours": [
+      "Monday: 11:00 AM – 9:30 PM",
+      "Tuesday: 11:00 AM – 9:30 PM",
+      "Wednesday: 11:00 AM – 9:30 PM",
+      "Thursday: 11:00 AM – 9:30 PM",
+      "Friday: 11:00 AM – 9:30 PM",
+      "Saturday: 11:00 AM – 9:30 PM",
+      "Sunday: 11:00 AM – 9:30 PM"
+    ],
+    "osmEnrichedAt": "2026-07-02T08:02:00.768Z",
+    "openingHoursSource": "osm"
+  }
+}

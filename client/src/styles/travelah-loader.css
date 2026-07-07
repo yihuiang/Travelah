@@ -1,0 +1,68 @@
+.travelah-loader {
+  --loader-rust: #b84a2e;
+  --loader-serif: 'Instrument Serif', Georgia, serif;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem 5rem;
+  min-height: calc(100vh - 62px);
+}
+
+.travelah-loader-mark {
+  position: relative;
+  display: inline-block;
+}
+
+.travelah-loader-word {
+  display: block;
+  font-family: var(--loader-serif);
+  font-style: italic;
+  font-size: clamp(48px, 10vw, 72px);
+  line-height: 1;
+  color: var(--loader-rust);
+  letter-spacing: -1.5px;
+  white-space: nowrap;
+}
+
+.travelah-loader-word--dim {
+  opacity: 0.2;
+}
+
+.travelah-loader-fill {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: travelah-loader-sweep 1.5s ease-in-out infinite;
+}
+
+.travelah-loader-fill .travelah-loader-word {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes travelah-loader-sweep {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  90% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+.itin-v2.itin-loading-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

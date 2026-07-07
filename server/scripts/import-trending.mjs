@@ -28,6 +28,21 @@ const DEFAULT_BATCHES = [
   { file: path.join(mediaCrawlerCsv, 'sabah2_search_contents_2026-06-11.csv'), label: 'sabah' },
   { file: path.join(mediaCrawlerCsv, 'sarawak1_search_contents_2026-06-12.csv'), label: 'sarawak' },
   { file: path.join(mediaCrawlerCsv, 'sarawak2_earch_contents_2026-06-12.csv'), label: 'sarawak' },
+  { file: path.join(mediaCrawlerCsv, 'terenganu1_search_contents_2026-06-16.csv'), label: 'terengganu' },
+  { file: path.join(mediaCrawlerCsv, 'terenganu2_search_contents_2026-06-17.csv'), label: 'terengganu' },
+  { file: path.join(mediaCrawlerCsv, 'terenganu3_search_contents_2026-06-17.csv'), label: 'terengganu' },
+  { file: path.join(mediaCrawlerCsv, 'kedah_merged.csv'), label: 'kedah' },
+  { file: path.join(mediaCrawlerCsv, 'kedah1_search_contents_2026-06-15.csv'), label: 'kedah' },
+  { file: path.join(mediaCrawlerCsv, 'kedah2_search_contents_2026-06-16.csv'), label: 'kedah' },
+  { file: path.join(mediaCrawlerCsv, 'putrajaya_search_contents_2026-06-14.csv'), label: 'putrajaya' },
+  { file: path.join(mediaCrawlerCsv, 'johor1_search_contents_2026-06-18.csv'), label: 'johor' },
+  { file: path.join(mediaCrawlerCsv, 'johor2_search_contents_2026-06-19.csv'), label: 'johor' },
+  { file: path.join(mediaCrawlerCsv, 'johor3_search_contents_2026-06-20.csv'), label: 'johor' },
+  { file: path.join(mediaCrawlerCsv, 'perlis_search_contents_2026-06-21.csv'), label: 'perlis' },
+  { file: path.join(mediaCrawlerCsv, 'kelantan1_search_contents_2026-06-21.csv'), label: 'kelantan' },
+  { file: path.join(mediaCrawlerCsv, 'kelantan2_search_contents_2026-06-22.csv'), label: 'kelantan' },
+  { file: path.join(mediaCrawlerCsv, 'selangor1_search_contents_2026-06-22.csv'), label: 'selangor' },
+  { file: path.join(mediaCrawlerCsv, 'selangor2_search_contents_2026-06-23.csv'), label: 'selangor' },
 ]
 
 function loadCsv(filePath, batchLabel) {

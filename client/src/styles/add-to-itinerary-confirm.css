@@ -1,0 +1,249 @@
+.add-itin-confirm {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.add-itin-confirm-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(26, 20, 16, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.add-itin-confirm-card {
+  position: relative;
+  z-index: 1;
+  width: min(420px, 100%);
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 18px 48px rgba(26, 20, 16, 0.18);
+  overflow: visible;
+}
+
+.add-itin-confirm-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--ff-serif, 'Instrument Serif', Georgia, serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink, #1a1410);
+}
+
+.add-itin-confirm-lead {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #6b5d54;
+}
+
+.add-itin-confirm-meta {
+  margin: 0 0 12px;
+  display: grid;
+  gap: 10px;
+  overflow: visible;
+}
+
+.add-itin-confirm-row.is-select {
+  align-items: center;
+  position: relative;
+}
+
+.add-itin-confirm-row.is-select.open {
+  z-index: 3;
+}
+
+.add-itin-confirm-row.is-select dd {
+  min-width: 0;
+}
+
+.add-itin-day-picker {
+  position: relative;
+  width: 100%;
+}
+
+.add-itin-day-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: var(--ink, #1a1410);
+}
+
+.add-itin-day-trigger:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.add-itin-day-value {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.add-itin-day-caret {
+  flex-shrink: 0;
+  font-size: 20px;
+  color: #9a8678;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.add-itin-day-picker.open .add-itin-day-caret {
+  transform: rotate(180deg);
+  color: var(--rust, #b84a2e);
+}
+
+.add-itin-day-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -12px;
+  right: -12px;
+  z-index: 30;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--rust-lt, #e8c4b4);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(184, 74, 46, 0.14);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.add-itin-day-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #6b5d54;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.add-itin-day-option:hover {
+  background: #fff5f0;
+  color: var(--ink, #1a1410);
+}
+
+.add-itin-day-option.selected {
+  background: rgba(184, 74, 46, 0.1);
+  color: var(--rust, #b84a2e);
+  font-weight: 600;
+}
+
+.add-itin-day-option-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.add-itin-day-check {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--rust, #b84a2e);
+  margin-top: 1px;
+}
+
+.add-itin-confirm-note {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #9a8678;
+}
+
+.add-itin-confirm-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--rust-lt, #e8c4b4);
+  border-radius: 12px;
+  background: #fffaf7;
+}
+
+.add-itin-confirm-row dt {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9a8678;
+}
+
+.add-itin-confirm-row dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink, #1a1410);
+}
+
+.add-itin-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.add-itin-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 100px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.add-itin-btn.ghost {
+  border: 1px solid var(--rust-lt, #e8c4b4);
+  background: #fff;
+  color: #6b5d54;
+}
+
+.add-itin-btn.ghost:hover:not(:disabled) {
+  border-color: var(--rust, #b84a2e);
+  color: var(--rust, #b84a2e);
+}
+
+.add-itin-btn.primary {
+  border: none;
+  background: var(--rust, #b84a2e);
+  color: #fff;
+}
+
+.add-itin-btn.primary:hover:not(:disabled) {
+  background: var(--rust-dk, #7a2e18);
+}
+
+.add-itin-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}

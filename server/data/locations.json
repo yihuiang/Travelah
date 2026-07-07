@@ -1,0 +1,2572 @@
+[
+  {
+    "_id": "johor",
+    "name": "Johor",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "johor",
+      "柔佛"
+    ],
+    "matchRules": {
+      "state": "Johor"
+    },
+    "minPlaces": 3,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 8
+  },
+  {
+    "_id": "johor-jb",
+    "name": "Johor Bahru",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "johor bahru",
+      "新山",
+      "jb"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "johor bahru",
+        "新山",
+        "jb"
+      ],
+      "descriptionContains": [
+        "johor bahru",
+        "新山",
+        "jb ",
+        "jalan dhoby"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-iskandar",
+    "name": "Iskandar Puteri",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "iskandar puteri",
+      "nusajaya",
+      "依斯干达"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "iskandar puteri",
+        "nusajaya",
+        "依斯干达"
+      ],
+      "descriptionContains": [
+        "iskandar puteri",
+        "nusajaya",
+        "依斯干达"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-muar",
+    "name": "Muar",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "muar",
+      "麻坡"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "muar",
+        "麻坡"
+      ],
+      "descriptionContains": [
+        "muar",
+        "麻坡"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-batu-pahat",
+    "name": "Batu Pahat",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "batu pahat",
+      "峇株巴辖"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "batu pahat",
+        "峇株巴辖"
+      ],
+      "descriptionContains": [
+        "batu pahat",
+        "峇株巴辖"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-kluang",
+    "name": "Kluang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "kluang",
+      "居銮"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "kluang",
+        "居銮"
+      ],
+      "descriptionContains": [
+        "kluang",
+        "居銮"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-pasir-gudang",
+    "name": "Pasir Gudang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "pasir gudang",
+      "巴西古当"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "pasir gudang",
+        "巴西古当"
+      ],
+      "descriptionContains": [
+        "pasir gudang",
+        "巴西古当"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-kulai",
+    "name": "Kulai",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "kulai",
+      "古来"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "kulai",
+        "古来"
+      ],
+      "descriptionContains": [
+        "kulai",
+        "古来"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 7,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-pontian",
+    "name": "Pontian",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "pontian",
+      "笨珍"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "pontian",
+        "笨珍"
+      ],
+      "descriptionContains": [
+        "pontian",
+        "笨珍"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 8,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "johor-segamat",
+    "name": "Segamat",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "johor",
+    "state": "Johor",
+    "dataState": "Johor",
+    "aliases": [
+      "segamat",
+      "昔加末"
+    ],
+    "matchRules": {
+      "requireState": "Johor",
+      "nameContains": [
+        "segamat",
+        "昔加末"
+      ],
+      "descriptionContains": [
+        "segamat",
+        "昔加末"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 9,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kedah",
+    "name": "Kedah",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "kedah",
+      "吉打"
+    ],
+    "matchRules": {
+      "state": "Kedah"
+    },
+    "minPlaces": 3,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 9
+  },
+  {
+    "_id": "kedah-alor-setar",
+    "name": "Alor Setar",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kedah",
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "alor setar",
+      "亚罗士打",
+      "alor star"
+    ],
+    "matchRules": {
+      "requireState": "Kedah",
+      "nameContains": [
+        "alor setar",
+        "亚罗士打",
+        "alor star"
+      ],
+      "descriptionContains": [
+        "alor setar",
+        "亚罗士打",
+        "alor star"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kedah-sungai-petani",
+    "name": "Sungai Petani",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kedah",
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "sungai petani",
+      "双溪大年"
+    ],
+    "matchRules": {
+      "requireState": "Kedah",
+      "nameContains": [
+        "sungai petani",
+        "双溪大年"
+      ],
+      "descriptionContains": [
+        "sungai petani",
+        "双溪大年"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kedah-kulim",
+    "name": "Kulim",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kedah",
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "kulim",
+      "居林"
+    ],
+    "matchRules": {
+      "requireState": "Kedah",
+      "nameContains": [
+        "kulim",
+        "居林"
+      ],
+      "descriptionContains": [
+        "kulim",
+        "居林"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kedah-langkawi",
+    "name": "Langkawi",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kedah",
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "langkawi",
+      "兰卡威",
+      "pulau langkawi"
+    ],
+    "matchRules": {
+      "requireState": "Kedah",
+      "nameContains": [
+        "langkawi",
+        "兰卡威",
+        "pulau langkawi"
+      ],
+      "descriptionContains": [
+        "langkawi",
+        "兰卡威",
+        "pulau langkawi"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": true,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 3
+  },
+  {
+    "_id": "kedah-jitra",
+    "name": "Jitra",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kedah",
+    "state": "Kedah",
+    "dataState": "Kedah",
+    "aliases": [
+      "jitra",
+      "日得拉"
+    ],
+    "matchRules": {
+      "requireState": "Kedah",
+      "nameContains": [
+        "jitra",
+        "日得拉"
+      ],
+      "descriptionContains": [
+        "jitra",
+        "日得拉"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan",
+    "name": "Kelantan",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "kelantan",
+      "吉兰丹"
+    ],
+    "matchRules": {
+      "state": "Kelantan"
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan-kota-bharu",
+    "name": "Kota Bharu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kelantan",
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "kota bharu",
+      "哥打巴鲁",
+      "kotabharu"
+    ],
+    "matchRules": {
+      "requireState": "Kelantan",
+      "nameContains": [
+        "kota bharu",
+        "哥打巴鲁",
+        "kotabharu"
+      ],
+      "descriptionContains": [
+        "kota bharu",
+        "哥打巴鲁",
+        "kotabharu"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan-pasir-mas",
+    "name": "Pasir Mas",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kelantan",
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "pasir mas",
+      "巴西马"
+    ],
+    "matchRules": {
+      "requireState": "Kelantan",
+      "nameContains": [
+        "pasir mas",
+        "巴西马"
+      ],
+      "descriptionContains": [
+        "pasir mas",
+        "巴西马"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan-tanah-merah",
+    "name": "Tanah Merah",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kelantan",
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "tanah merah",
+      "丹那美拉"
+    ],
+    "matchRules": {
+      "requireState": "Kelantan",
+      "nameContains": [
+        "tanah merah",
+        "丹那美拉"
+      ],
+      "descriptionContains": [
+        "tanah merah",
+        "丹那美拉"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan-gua-musang",
+    "name": "Gua Musang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kelantan",
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "gua musang",
+      "话望生"
+    ],
+    "matchRules": {
+      "requireState": "Kelantan",
+      "nameContains": [
+        "gua musang",
+        "话望生"
+      ],
+      "descriptionContains": [
+        "gua musang",
+        "话望生"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kelantan-tumpat",
+    "name": "Tumpat",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "kelantan",
+    "state": "Kelantan",
+    "dataState": "Kelantan",
+    "aliases": [
+      "tumpat",
+      "道北"
+    ],
+    "matchRules": {
+      "requireState": "Kelantan",
+      "nameContains": [
+        "tumpat",
+        "道北"
+      ],
+      "descriptionContains": [
+        "tumpat",
+        "道北"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "melaka",
+    "name": "Melaka",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Melaka",
+    "dataState": "Melaka",
+    "aliases": [
+      "melaka",
+      "malacca",
+      "马六甲"
+    ],
+    "matchRules": {
+      "state": "Melaka"
+    },
+    "minPlaces": 3,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 7
+  },
+  {
+    "_id": "melaka-city",
+    "name": "Melaka City",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "melaka",
+    "state": "Melaka",
+    "dataState": "Melaka",
+    "aliases": [
+      "melaka city",
+      "马六甲市",
+      "melaka town",
+      "jonker",
+      "鸡场街"
+    ],
+    "matchRules": {
+      "requireState": "Melaka",
+      "nameContains": [
+        "melaka city",
+        "马六甲市",
+        "melaka town",
+        "jonker",
+        "鸡场街"
+      ],
+      "descriptionContains": [
+        "melaka",
+        "malacca",
+        "马六甲",
+        "jonker",
+        "鸡场街"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "melaka-alor-gajah",
+    "name": "Alor Gajah",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "melaka",
+    "state": "Melaka",
+    "dataState": "Melaka",
+    "aliases": [
+      "alor gajah",
+      "亚罗牙也"
+    ],
+    "matchRules": {
+      "requireState": "Melaka",
+      "nameContains": [
+        "alor gajah",
+        "亚罗牙也"
+      ],
+      "descriptionContains": [
+        "alor gajah",
+        "亚罗牙也"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "melaka-jasin",
+    "name": "Jasin",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "melaka",
+    "state": "Melaka",
+    "dataState": "Melaka",
+    "aliases": [
+      "jasin",
+      "野新"
+    ],
+    "matchRules": {
+      "requireState": "Melaka",
+      "nameContains": [
+        "jasin",
+        "野新"
+      ],
+      "descriptionContains": [
+        "jasin",
+        "野新"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "negeri-sembilan",
+    "name": "Negeri Sembilan",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "negeri sembilan",
+      "森美兰"
+    ],
+    "matchRules": {
+      "state": "Negeri Sembilan"
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "ns-seremban",
+    "name": "Seremban",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "negeri-sembilan",
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "seremban",
+      "芙蓉"
+    ],
+    "matchRules": {
+      "requireState": "Negeri Sembilan",
+      "nameContains": [
+        "seremban",
+        "芙蓉"
+      ],
+      "descriptionContains": [
+        "seremban",
+        "芙蓉"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "ns-port-dickson",
+    "name": "Port Dickson",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "negeri-sembilan",
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "port dickson",
+      "pd",
+      "波德申"
+    ],
+    "matchRules": {
+      "requireState": "Negeri Sembilan",
+      "nameContains": [
+        "port dickson",
+        "pd",
+        "波德申"
+      ],
+      "descriptionContains": [
+        "port dickson",
+        "pd",
+        "波德申"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "ns-nilai",
+    "name": "Nilai",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "negeri-sembilan",
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "nilai",
+      "汝来"
+    ],
+    "matchRules": {
+      "requireState": "Negeri Sembilan",
+      "nameContains": [
+        "nilai",
+        "汝来"
+      ],
+      "descriptionContains": [
+        "nilai",
+        "汝来"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "ns-bahau",
+    "name": "Bahau",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "negeri-sembilan",
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "bahau",
+      "马口"
+    ],
+    "matchRules": {
+      "requireState": "Negeri Sembilan",
+      "nameContains": [
+        "bahau",
+        "马口"
+      ],
+      "descriptionContains": [
+        "bahau",
+        "马口"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "ns-tampin",
+    "name": "Tampin",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "negeri-sembilan",
+    "state": "Negeri Sembilan",
+    "dataState": "Negeri Sembilan",
+    "aliases": [
+      "tampin",
+      "淡边"
+    ],
+    "matchRules": {
+      "requireState": "Negeri Sembilan",
+      "nameContains": [
+        "tampin",
+        "淡边"
+      ],
+      "descriptionContains": [
+        "tampin",
+        "淡边"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang",
+    "name": "Pahang",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "pahang",
+      "彭亨"
+    ],
+    "matchRules": {
+      "state": "Pahang"
+    },
+    "minPlaces": 3,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-kuantan",
+    "name": "Kuantan",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "kuantan",
+      "关丹"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "kuantan",
+        "关丹"
+      ],
+      "descriptionContains": [
+        "kuantan",
+        "关丹"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-temerloh",
+    "name": "Temerloh",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "temerloh",
+      "淡马鲁"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "temerloh",
+        "淡马鲁"
+      ],
+      "descriptionContains": [
+        "temerloh",
+        "淡马鲁"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-genting",
+    "name": "Genting Highlands",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "genting",
+      "genting highlands",
+      "云顶",
+      "resorts world genting"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "genting",
+        "云顶"
+      ],
+      "descriptionContains": [
+        "genting",
+        "云顶",
+        "resorts world"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": true,
+    "recommended": true,
+    "active": true
+  },
+  {
+    "_id": "pahang-bentong",
+    "name": "Bentong",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "bentong",
+      "文冬"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "bentong",
+        "文冬"
+      ],
+      "descriptionContains": [
+        "bentong",
+        "文冬"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-raub",
+    "name": "Raub",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "raub",
+      "劳勿"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "raub",
+        "劳勿"
+      ],
+      "descriptionContains": [
+        "raub",
+        "劳勿"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-pekan",
+    "name": "Pekan",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "pekan",
+      "北根"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "pekan",
+        "北根"
+      ],
+      "descriptionContains": [
+        "pekan",
+        "北根"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "pahang-cameron",
+    "name": "Cameron Highlands",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pahang",
+    "state": "Pahang",
+    "dataState": "Pahang",
+    "aliases": [
+      "cameron highlands",
+      "cameron",
+      "金马伦",
+      "brinchang",
+      "tanah rata"
+    ],
+    "matchRules": {
+      "requireState": "Pahang",
+      "nameContains": [
+        "cameron highlands",
+        "cameron",
+        "金马伦",
+        "brinchang",
+        "tanah rata"
+      ],
+      "descriptionContains": [
+        "cameron highlands",
+        "cameron",
+        "金马伦"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": true,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 6
+  },
+  {
+    "_id": "pulau-pinang",
+    "name": "Penang",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "pulau pinang",
+      "penang",
+      "槟城"
+    ],
+    "matchRules": {
+      "state": "Penang"
+    },
+    "minPlaces": 3,
+    "sortOrder": 7,
+    "featured": true,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 1
+  },
+  {
+    "_id": "penang-george-town",
+    "name": "George Town",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pulau-pinang",
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "george town",
+      "georgetown",
+      "乔治市"
+    ],
+    "matchRules": {
+      "requireState": "Penang",
+      "nameContains": [
+        "george town",
+        "georgetown",
+        "乔治市"
+      ],
+      "descriptionContains": [
+        "george town",
+        "georgetown",
+        "乔治市",
+        "love lane",
+        "armenian"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "penang-butterworth",
+    "name": "Butterworth",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pulau-pinang",
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "butterworth",
+      "北海"
+    ],
+    "matchRules": {
+      "requireState": "Penang",
+      "nameContains": [
+        "butterworth",
+        "北海"
+      ],
+      "descriptionContains": [
+        "butterworth",
+        "北海",
+        "penang sentral"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "penang-bukit-mertajam",
+    "name": "Bukit Mertajam",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pulau-pinang",
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "bukit mertajam",
+      "大山脚"
+    ],
+    "matchRules": {
+      "requireState": "Penang",
+      "nameContains": [
+        "bukit mertajam",
+        "大山脚"
+      ],
+      "descriptionContains": [
+        "bukit mertajam",
+        "大山脚"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "penang-bayan-lepas",
+    "name": "Bayan Lepas",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pulau-pinang",
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "bayan lepas",
+      "峇六拜"
+    ],
+    "matchRules": {
+      "requireState": "Penang",
+      "nameContains": [
+        "bayan lepas",
+        "峇六拜"
+      ],
+      "descriptionContains": [
+        "bayan lepas",
+        "峇六拜"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "penang-nibong-tebal",
+    "name": "Nibong Tebal",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "pulau-pinang",
+    "state": "Penang",
+    "dataState": "Penang",
+    "aliases": [
+      "nibong tebal",
+      "高渊"
+    ],
+    "matchRules": {
+      "requireState": "Penang",
+      "nameContains": [
+        "nibong tebal",
+        "高渊"
+      ],
+      "descriptionContains": [
+        "nibong tebal",
+        "高渊"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak",
+    "name": "Perak",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "perak",
+      "霹雳"
+    ],
+    "matchRules": {
+      "state": "Perak"
+    },
+    "minPlaces": 3,
+    "sortOrder": 8,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 11
+  },
+  {
+    "_id": "perak-ipoh",
+    "name": "Ipoh",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "ipoh",
+      "怡保",
+      "old town ipoh",
+      "concubine lane"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "ipoh",
+        "怡保",
+        "old town ipoh",
+        "concubine lane"
+      ],
+      "descriptionContains": [
+        "ipoh",
+        "怡保",
+        "old town ipoh",
+        "concubine lane"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-taiping",
+    "name": "Taiping",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "taiping",
+      "太平",
+      "maxwell hill"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "taiping",
+        "太平",
+        "maxwell hill"
+      ],
+      "descriptionContains": [
+        "taiping",
+        "太平",
+        "maxwell hill"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-teluk-intan",
+    "name": "Teluk Intan",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "teluk intan",
+      "安顺"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "teluk intan",
+        "安顺"
+      ],
+      "descriptionContains": [
+        "teluk intan",
+        "安顺"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-sitiawan",
+    "name": "Sitiawan",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "sitiawan",
+      "实兆远"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "sitiawan",
+        "实兆远"
+      ],
+      "descriptionContains": [
+        "sitiawan",
+        "实兆远"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-lumut",
+    "name": "Lumut",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "lumut",
+      "红土坎"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "lumut",
+        "红土坎"
+      ],
+      "descriptionContains": [
+        "lumut",
+        "红土坎"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-kampar",
+    "name": "Kampar",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "kampar",
+      "金宝"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "kampar",
+        "金宝"
+      ],
+      "descriptionContains": [
+        "kampar",
+        "金宝"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perak-batu-gajah",
+    "name": "Batu Gajah",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perak",
+    "state": "Perak",
+    "dataState": "Perak",
+    "aliases": [
+      "batu gajah",
+      "华都牙也"
+    ],
+    "matchRules": {
+      "requireState": "Perak",
+      "nameContains": [
+        "batu gajah",
+        "华都牙也"
+      ],
+      "descriptionContains": [
+        "batu gajah",
+        "华都牙也"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 7,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perlis",
+    "name": "Perlis",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Perlis",
+    "dataState": "Perlis",
+    "aliases": [
+      "perlis",
+      "玻璃市"
+    ],
+    "matchRules": {
+      "state": "Perlis"
+    },
+    "minPlaces": 1,
+    "sortOrder": 9,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perlis-kangar",
+    "name": "Kangar",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perlis",
+    "state": "Perlis",
+    "dataState": "Perlis",
+    "aliases": [
+      "kangar",
+      "加央"
+    ],
+    "matchRules": {
+      "requireState": "Perlis",
+      "nameContains": [
+        "kangar",
+        "加央"
+      ],
+      "descriptionContains": [
+        "kangar",
+        "加央"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perlis-arau",
+    "name": "Arau",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perlis",
+    "state": "Perlis",
+    "dataState": "Perlis",
+    "aliases": [
+      "arau",
+      "亚娄"
+    ],
+    "matchRules": {
+      "requireState": "Perlis",
+      "nameContains": [
+        "arau",
+        "亚娄"
+      ],
+      "descriptionContains": [
+        "arau",
+        "亚娄"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "perlis-padang-besar",
+    "name": "Padang Besar",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "perlis",
+    "state": "Perlis",
+    "dataState": "Perlis",
+    "aliases": [
+      "padang besar",
+      "巴东勿刹"
+    ],
+    "matchRules": {
+      "requireState": "Perlis",
+      "nameContains": [
+        "padang besar",
+        "巴东勿刹"
+      ],
+      "descriptionContains": [
+        "padang besar",
+        "巴东勿刹"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah",
+    "name": "Sabah",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "sabah",
+      "沙巴"
+    ],
+    "matchRules": {
+      "state": "Sabah"
+    },
+    "minPlaces": 3,
+    "sortOrder": 10,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 5
+  },
+  {
+    "_id": "sabah-kota-kinabalu",
+    "name": "Kota Kinabalu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "kota kinabalu",
+      "kinabalu",
+      "亚庇",
+      "kk"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "kota kinabalu",
+        "kinabalu",
+        "亚庇",
+        "kk"
+      ],
+      "descriptionContains": [
+        "kota kinabalu",
+        "kinabalu",
+        "亚庇",
+        "gaya street"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah-sandakan",
+    "name": "Sandakan",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "sandakan",
+      "山打根"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "sandakan",
+        "山打根"
+      ],
+      "descriptionContains": [
+        "sandakan",
+        "山打根"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah-tawau",
+    "name": "Tawau",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "tawau",
+      "斗湖"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "tawau",
+        "斗湖"
+      ],
+      "descriptionContains": [
+        "tawau",
+        "斗湖"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah-lahad-datu",
+    "name": "Lahad Datu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "lahad datu",
+      "拿笃"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "lahad datu",
+        "拿笃"
+      ],
+      "descriptionContains": [
+        "lahad datu",
+        "拿笃"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah-keningau",
+    "name": "Keningau",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "keningau",
+      "根地咬"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "keningau",
+        "根地咬"
+      ],
+      "descriptionContains": [
+        "keningau",
+        "根地咬"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sabah-semporna",
+    "name": "Semporna",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sabah",
+    "state": "Sabah",
+    "dataState": "Sabah",
+    "aliases": [
+      "semporna",
+      "仙本那",
+      "mabul",
+      "kapalai"
+    ],
+    "matchRules": {
+      "requireState": "Sabah",
+      "nameContains": [
+        "semporna",
+        "仙本那",
+        "mabul",
+        "kapalai"
+      ],
+      "descriptionContains": [
+        "semporna",
+        "仙本那",
+        "mabul",
+        "kapalai"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak",
+    "name": "Sarawak",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "sarawak",
+      "砂拉越"
+    ],
+    "matchRules": {
+      "state": "Sarawak"
+    },
+    "minPlaces": 3,
+    "sortOrder": 11,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak-kuching",
+    "name": "Kuching",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "kuching",
+      "古晋"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "kuching",
+        "古晋"
+      ],
+      "descriptionContains": [
+        "kuching",
+        "古晋"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": true,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 4
+  },
+  {
+    "_id": "sarawak-miri",
+    "name": "Miri",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "miri",
+      "美里"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "miri",
+        "美里"
+      ],
+      "descriptionContains": [
+        "miri",
+        "美里"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak-sibu",
+    "name": "Sibu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "sibu",
+      "诗巫"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "sibu",
+        "诗巫"
+      ],
+      "descriptionContains": [
+        "sibu",
+        "诗巫"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak-bintulu",
+    "name": "Bintulu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "bintulu",
+      "民都鲁"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "bintulu",
+        "民都鲁"
+      ],
+      "descriptionContains": [
+        "bintulu",
+        "民都鲁"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak-sri-aman",
+    "name": "Sri Aman",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "sri aman",
+      "诗里阿曼"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "sri aman",
+        "诗里阿曼"
+      ],
+      "descriptionContains": [
+        "sri aman",
+        "诗里阿曼"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "sarawak-limbang",
+    "name": "Limbang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "sarawak",
+    "state": "Sarawak",
+    "dataState": "Sarawak",
+    "aliases": [
+      "limbang",
+      "林梦"
+    ],
+    "matchRules": {
+      "requireState": "Sarawak",
+      "nameContains": [
+        "limbang",
+        "林梦"
+      ],
+      "descriptionContains": [
+        "limbang",
+        "林梦"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor",
+    "name": "Selangor",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "selangor",
+      "雪兰莪"
+    ],
+    "matchRules": {
+      "state": "Selangor"
+    },
+    "minPlaces": 3,
+    "sortOrder": 12,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-shah-alam",
+    "name": "Shah Alam",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "shah alam",
+      "莎阿南"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "shah alam",
+        "莎阿南"
+      ],
+      "descriptionContains": [
+        "shah alam",
+        "莎阿南"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-petaling-jaya",
+    "name": "Petaling Jaya",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "petaling jaya",
+      "pj",
+      "八打灵"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "petaling jaya",
+        "pj",
+        "八打灵"
+      ],
+      "descriptionContains": [
+        "petaling jaya",
+        "pj",
+        "八打灵"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-subang-jaya",
+    "name": "Subang Jaya",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "subang jaya",
+      "subang",
+      "梳邦"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "subang jaya",
+        "subang",
+        "梳邦"
+      ],
+      "descriptionContains": [
+        "subang jaya",
+        "subang",
+        "梳邦"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-klang",
+    "name": "Klang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "klang",
+      "巴生"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "klang",
+        "巴生"
+      ],
+      "descriptionContains": [
+        "klang",
+        "巴生"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-kajang",
+    "name": "Kajang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "kajang",
+      "加影"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "kajang",
+        "加影"
+      ],
+      "descriptionContains": [
+        "kajang",
+        "加影"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 5,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-puchong",
+    "name": "Puchong",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "puchong",
+      "蒲种"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "puchong",
+        "蒲种"
+      ],
+      "descriptionContains": [
+        "puchong",
+        "蒲种"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 6,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-ampang",
+    "name": "Ampang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "ampang",
+      "安邦"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "ampang",
+        "安邦"
+      ],
+      "descriptionContains": [
+        "ampang",
+        "安邦"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 7,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-rawang",
+    "name": "Rawang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "rawang",
+      "万挠"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "rawang",
+        "万挠"
+      ],
+      "descriptionContains": [
+        "rawang",
+        "万挠"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 8,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "selangor-cyberjaya",
+    "name": "Cyberjaya",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "selangor",
+    "state": "Selangor",
+    "dataState": "Selangor",
+    "aliases": [
+      "cyberjaya",
+      "赛城"
+    ],
+    "matchRules": {
+      "requireState": "Selangor",
+      "nameContains": [
+        "cyberjaya",
+        "赛城"
+      ],
+      "descriptionContains": [
+        "cyberjaya",
+        "赛城"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 9,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "terengganu",
+    "name": "Terengganu",
+    "type": "state",
+    "subType": "state",
+    "parentId": null,
+    "state": "Terengganu",
+    "dataState": "Terengganu",
+    "aliases": [
+      "terengganu",
+      "登嘉楼"
+    ],
+    "matchRules": {
+      "state": "Terengganu"
+    },
+    "minPlaces": 3,
+    "sortOrder": 13,
+    "featured": false,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 10
+  },
+  {
+    "_id": "terengganu-kuala-terengganu",
+    "name": "Kuala Terengganu",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "terengganu",
+    "state": "Terengganu",
+    "dataState": "Terengganu",
+    "aliases": [
+      "kuala terengganu",
+      "瓜拉登嘉楼"
+    ],
+    "matchRules": {
+      "requireState": "Terengganu",
+      "nameContains": [
+        "kuala terengganu",
+        "瓜拉登嘉楼"
+      ],
+      "descriptionContains": [
+        "kuala terengganu",
+        "瓜拉登嘉楼"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 1,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "terengganu-kemaman",
+    "name": "Kemaman",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "terengganu",
+    "state": "Terengganu",
+    "dataState": "Terengganu",
+    "aliases": [
+      "kemaman",
+      "甘马挽",
+      "chukai"
+    ],
+    "matchRules": {
+      "requireState": "Terengganu",
+      "nameContains": [
+        "kemaman",
+        "甘马挽",
+        "chukai"
+      ],
+      "descriptionContains": [
+        "kemaman",
+        "甘马挽",
+        "chukai"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 2,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "terengganu-dungun",
+    "name": "Dungun",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "terengganu",
+    "state": "Terengganu",
+    "dataState": "Terengganu",
+    "aliases": [
+      "dungun",
+      "龙运"
+    ],
+    "matchRules": {
+      "requireState": "Terengganu",
+      "nameContains": [
+        "dungun",
+        "龙运"
+      ],
+      "descriptionContains": [
+        "dungun",
+        "龙运"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 3,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "terengganu-marang",
+    "name": "Marang",
+    "type": "subdestination",
+    "subType": "city",
+    "parentId": "terengganu",
+    "state": "Terengganu",
+    "dataState": "Terengganu",
+    "aliases": [
+      "marang",
+      "马江"
+    ],
+    "matchRules": {
+      "requireState": "Terengganu",
+      "nameContains": [
+        "marang",
+        "马江"
+      ],
+      "descriptionContains": [
+        "marang",
+        "马江"
+      ]
+    },
+    "minPlaces": 1,
+    "sortOrder": 4,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "kuala-lumpur",
+    "name": "Kuala Lumpur",
+    "type": "federal_territory",
+    "subType": "federal_territory",
+    "parentId": null,
+    "state": "Kuala Lumpur",
+    "dataState": "Kuala Lumpur",
+    "aliases": [
+      "kl",
+      "kuala lumpur",
+      "吉隆坡"
+    ],
+    "matchRules": {
+      "state": "Kuala Lumpur"
+    },
+    "minPlaces": 3,
+    "sortOrder": 14,
+    "featured": true,
+    "recommended": true,
+    "active": true,
+    "recommendOrder": 2
+  },
+  {
+    "_id": "putrajaya",
+    "name": "Putrajaya",
+    "type": "federal_territory",
+    "subType": "federal_territory",
+    "parentId": null,
+    "state": "Putrajaya",
+    "dataState": "Putrajaya",
+    "aliases": [
+      "putrajaya",
+      "布城"
+    ],
+    "matchRules": {
+      "state": "Putrajaya"
+    },
+    "minPlaces": 1,
+    "sortOrder": 15,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  },
+  {
+    "_id": "labuan",
+    "name": "Labuan",
+    "type": "federal_territory",
+    "subType": "federal_territory",
+    "parentId": null,
+    "state": "Labuan",
+    "dataState": "Labuan",
+    "aliases": [
+      "labuan",
+      "纳闽"
+    ],
+    "matchRules": {
+      "state": "Labuan"
+    },
+    "minPlaces": 1,
+    "sortOrder": 16,
+    "featured": false,
+    "recommended": false,
+    "active": true
+  }
+]

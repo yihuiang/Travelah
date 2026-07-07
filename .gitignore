@@ -1,8 +1,27 @@
 node_modules/
 dist/
+client/dist/
+
 .env
+client/.env
 *.log
 .DS_Store
+
+# Editor / AI tooling (local only)
+.claude/
+.cursor/
+
 nlp/.venv/
+nlp/__pycache__/
+*.pyc
+
+# R2-hosted media (local cache only — sync via server: npm run upload:r2:*)
+client/public/posts/
+client/public/places/*
+!client/public/places/.gitkeep
+client/public/images/*
+!client/public/images/.gitkeep
+
+# Profile avatars (uploaded to R2 when configured)
 client/public/avatars/*
 !client/public/avatars/.gitkeep

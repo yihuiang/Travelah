@@ -1,13 +1,48 @@
 import { useEffect, useRef, useState } from 'react'
-import PasswordField from './PasswordField.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
+import { resolveAvatarUrl } from '../utils/avatar.js'
 
 const MAX_AVATAR_BYTES = 2 * 1024 * 1024
 const AVATAR_ACCEPT = 'image/jpeg,image/png,image/webp,image/gif'
 
-const fieldClass =
-  'w-full bg-surface-container-low border border-outline-variant rounded-full px-6 py-3 focus:outline-none focus:ring-1 focus:ring-primary text-on-surface font-body-md disabled:opacity-60'
+function isValidEmail(value) {
+  const trimmed = String(value || '').trim()
+  if (!trimmed) return false
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
+}
 
-const labelClass = 'font-label-caps text-on-surface-variant uppercase'
+function EditPasswordField({ id, label, value, onChange, disabled, autoComplete, minLength }) {
+  const [show, setShow] = useState(false)
+
+  return (
+    <div className="edit-field-group">
+      <label className="edit-field-label" htmlFor={id}>
+        {label}
+      </label>
+      <div className="edit-password-wrap">
+        <input
+          id={id}
+          className="edit-field-input"
+          type={show ? 'text' : 'password'}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          autoComplete={autoComplete}
+          minLength={minLength}
+        />
+        <button
+          type="button"
+          className="btn-edit-toggle-pw"
+          onClick={() => setShow((v) => !v)}
+          disabled={disabled}
+          aria-label={show ? 'Hide password' : 'Show password'}
+        >
+          <span className="material-symbols-outlined">{show ? 'visibility_off' : 'visibility'}</span>
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function ProfileEditView({
   profile,
@@ -31,34 +66,49 @@ export default function ProfileEditView({
   const [pendingAvatarFile, setPendingAvatarFile] = useState(null)
   const [avatarPickError, setAvatarPickError] = useState(null)
   const [passwordOpen, setPasswordOpen] = useState(false)
+  const [personalSuccess, setPersonalSuccess] = useState(false)
+  const [emailError, setEmailError] = useState(null)
   const avatarInputRef = useRef(null)
+  const personalSuccessTimer = useRef(null)
 
   useEffect(() => {
     if (!profile) return
     setDisplayName(profile.displayName || '')
     setEmail(profile.email || '')
+    setAvatarPreview(resolveAvatarUrl(profile.avatarUrl))
+  }, [profile?.id, profile?.displayName, profile?.email, profile?.avatarUrl])
+
+  useEffect(() => {
+    if (!profile) return
     setCurrentPassword('')
     setNewPassword('')
     setConfirmPassword('')
-    setAvatarPreview(profile.avatarUrl || null)
     setPendingAvatarFile(null)
     setAvatarPickError(null)
     setPasswordOpen(false)
-  }, [profile])
+    setPersonalSuccess(false)
+    setEmailError(null)
+  }, [profile?.id])
 
   useEffect(() => {
     return () => {
       if (avatarPreview?.startsWith('blob:')) {
         URL.revokeObjectURL(avatarPreview)
       }
+      if (personalSuccessTimer.current) {
+        clearTimeout(personalSuccessTimer.current)
+      }
     }
   }, [avatarPreview])
+
+  const { t } = useLanguage()
 
   if (!profile) return null
 
   const initial = (displayName || profile.username || '?').charAt(0).toUpperCase()
   const busy = personalSubmitting || passwordSubmitting || avatarUploading
   const hasPendingPhoto = Boolean(pendingAvatarFile)
+  const showRemovePhoto = (avatarPreview || resolveAvatarUrl(profile.avatarUrl)) && !hasPendingPhoto
 
   function handleAvatarPick(event) {
     const file = event.target.files?.[0]
@@ -89,7 +139,7 @@ export default function ProfileEditView({
     }
     setPendingAvatarFile(null)
     setAvatarPickError(null)
-    setAvatarPreview(profile.avatarUrl || null)
+    setAvatarPreview(resolveAvatarUrl(profile.avatarUrl))
   }
 
   async function confirmPendingPhoto() {
@@ -103,262 +153,279 @@ export default function ProfileEditView({
     }
   }
 
-  function handleSavePersonalClick(event) {
+  async function handleSavePersonalClick(event) {
     event.preventDefault()
-    onSavePersonal({
+    setPersonalSuccess(false)
+
+    const trimmedEmail = email.trim()
+    if (!isValidEmail(trimmedEmail)) {
+      setEmailError(t('Please enter a valid email'))
+      return
+    }
+    setEmailError(null)
+
+    const ok = await onSavePersonal({
       displayName: displayName.trim(),
-      email: email.trim(),
+      email: trimmedEmail,
     })
+    if (ok) {
+      setPersonalSuccess(true)
+      if (personalSuccessTimer.current) clearTimeout(personalSuccessTimer.current)
+      personalSuccessTimer.current = setTimeout(() => setPersonalSuccess(false), 2500)
+    }
   }
 
-  function handleSavePasswordClick(event) {
+  async function handleSavePasswordClick(event) {
     event.preventDefault()
     if (newPassword && newPassword !== confirmPassword) {
       onSavePassword({ validationError: 'New passwords do not match' })
       return
     }
-    onSavePassword({
+    const ok = await onSavePassword({
       currentPassword: currentPassword || undefined,
       newPassword: newPassword || undefined,
     })
+    if (ok) {
+      closePasswordForm()
+    }
+  }
+
+  function closePasswordForm() {
+    setPasswordOpen(false)
+    setCurrentPassword('')
+    setNewPassword('')
+    setConfirmPassword('')
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-12">
-      <aside className="w-full md:w-1/4 flex flex-col gap-8">
-        <div className="bg-surface-container-lowest p-8 rounded-xl shadow-[0px_4px_20px_rgba(44,44,44,0.05)] border border-outline-variant/30 text-center">
-          <div className="relative w-32 h-32 mx-auto mb-6">
-            {avatarPreview ? (
-              <img
-                alt={displayName || profile.displayName}
-                className={`w-full h-full object-cover rounded-full border-4 ${
-                  hasPendingPhoto ? 'border-secondary-container' : 'border-surface-variant'
-                }`}
-                src={avatarPreview}
-              />
-            ) : (
-              <div className="w-full h-full rounded-full border-4 border-surface-variant bg-surface-container flex items-center justify-center text-primary font-headline-lg">
-                {initial}
-              </div>
-            )}
-            {hasPendingPhoto && (
-              <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary-container text-on-primary text-[10px] font-label-caps uppercase tracking-wider px-3 py-1 rounded-full whitespace-nowrap">
-                Preview
-              </span>
-            )}
+    <div className="profile-edit-grid">
+      <aside className="edit-avatar-card">
+        <span className="material-symbols-outlined edit-avatar-watermark">local_florist</span>
+
+        <div className="edit-avatar-wrap">
+          {avatarPreview ? (
+            <img
+              className="edit-avatar-img"
+              src={avatarPreview}
+              alt={displayName || profile.displayName}
+            />
+          ) : (
+            <div className="edit-avatar-initial">{initial}</div>
+          )}
+          {hasPendingPhoto && <span className="edit-avatar-preview-badge">{t('Preview')}</span>}
+          <button
+            type="button"
+            className="btn-edit-avatar-pick"
+            disabled={busy}
+            onClick={() => avatarInputRef.current?.click()}
+            aria-label="Change profile photo"
+          >
+            <span className="material-symbols-outlined">edit</span>
+          </button>
+          <input
+            ref={avatarInputRef}
+            type="file"
+            accept={AVATAR_ACCEPT}
+            hidden
+            onChange={handleAvatarPick}
+          />
+        </div>
+
+        {hasPendingPhoto && (
+          <div className="edit-avatar-confirm">
+            <p>{t('Happy with this photo?')}</p>
             <button
               type="button"
-              disabled={busy}
-              onClick={() => avatarInputRef.current?.click()}
-              className="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-lg hover:scale-105 transition-transform disabled:opacity-60"
-              aria-label="Change profile photo"
+              className="btn-edit-done"
+              disabled={avatarUploading}
+              onClick={confirmPendingPhoto}
             >
-              <span className="material-symbols-outlined text-sm">edit</span>
+              {avatarUploading ? t('Saving…') : t('Done')}
             </button>
+            <button
+              type="button"
+              className="btn-edit-cancel-photo"
+              disabled={avatarUploading}
+              onClick={cancelPendingPhoto}
+            >
+              {t('Cancel')}
+            </button>
+          </div>
+        )}
+
+        {(avatarPickError || avatarError) && (
+          <p className="edit-avatar-error">{avatarPickError || avatarError}</p>
+        )}
+
+        <h2 className="edit-avatar-name">{displayName || profile.displayName}</h2>
+        <p className="edit-avatar-email">{email || profile.email || t('No email set')}</p>
+
+        <span className="edit-avatar-tier">
+          <span className="material-symbols-outlined">workspace_premium</span> {t('Explorer tier')}
+        </span>
+
+        {showRemovePhoto && (
+          <button
+            type="button"
+            className="btn-edit-remove-photo"
+            disabled={busy}
+            onClick={async () => {
+              if (!onRemoveAvatar) return
+              setAvatarPickError(null)
+              try {
+                await onRemoveAvatar()
+                if (avatarPreview?.startsWith('blob:')) URL.revokeObjectURL(avatarPreview)
+                setPendingAvatarFile(null)
+                setAvatarPreview(null)
+              } catch {
+                // Parent sets avatarError
+              }
+            }}
+          >
+            {t('Remove photo')}
+          </button>
+        )}
+      </aside>
+
+      <div className="edit-forms-col">
+        <form className="edit-form-card" onSubmit={handleSavePersonalClick} noValidate>
+          <span className="material-symbols-outlined edit-form-watermark">badge</span>
+          <h2 className="edit-form-title">{t('Personal Information')}</h2>
+
+          <div className="edit-field-group">
+            <label className="edit-field-label" htmlFor="edit-full-name">
+              {t('Full name')}
+            </label>
             <input
-              ref={avatarInputRef}
-              type="file"
-              accept={AVATAR_ACCEPT}
-              className="hidden"
-              onChange={handleAvatarPick}
+              id="edit-full-name"
+              className="edit-field-input"
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              required
+              maxLength={80}
+              disabled={busy}
             />
           </div>
 
-          {hasPendingPhoto && (
-            <>
-              <p className="font-body-md text-sm text-on-surface-variant mb-4">Happy with this photo?</p>
-              <div className="flex flex-col gap-2 mb-4">
-                <button
-                  type="button"
-                  disabled={avatarUploading}
-                  onClick={confirmPendingPhoto}
-                  className="w-full bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-caps hover:bg-primary-container transition-colors disabled:opacity-60"
-                >
-                  {avatarUploading ? 'Saving…' : 'Done'}
-                </button>
-                <button
-                  type="button"
-                  disabled={avatarUploading}
-                  onClick={cancelPendingPhoto}
-                  className="w-full px-6 py-2.5 rounded-full border border-outline-variant text-on-surface-variant hover:text-primary transition-colors disabled:opacity-60"
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
-          )}
-
-          {(avatarPickError || avatarError) && (
-            <p className="mb-4 text-error font-body-md text-sm bg-error-container/30 rounded-full py-2 px-4">
-              {avatarPickError || avatarError}
-            </p>
-          )}
-
-          <h2 className="font-headline-md text-headline-md text-on-surface">{displayName || profile.displayName}</h2>
-          <p className="font-body-md text-on-surface-variant mb-6 mt-1">{email || profile.email || 'No email set'}</p>
-          {(avatarPreview || profile.avatarUrl) && !hasPendingPhoto && (
-            <button
-              type="button"
-              disabled={busy}
-              onClick={async () => {
-                if (!onRemoveAvatar) return
-                setAvatarPickError(null)
-                try {
-                  await onRemoveAvatar()
-                  if (avatarPreview?.startsWith('blob:')) URL.revokeObjectURL(avatarPreview)
-                  setPendingAvatarFile(null)
-                  setAvatarPreview(null)
-                } catch {
-                  // Parent sets avatarError
+          <div className="edit-field-group">
+            <label className="edit-field-label" htmlFor="edit-email">
+              {t('Email')}
+            </label>
+            <input
+              id="edit-email"
+              className={`edit-field-input${emailError ? ' is-invalid' : ''}`}
+              type="text"
+              inputMode="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                if (emailError) setEmailError(null)
+              }}
+              onBlur={() => {
+                const trimmed = email.trim()
+                if (trimmed && !isValidEmail(trimmed)) {
+                  setEmailError(t('Please enter a valid email'))
                 }
               }}
-              className="font-body-md text-sm text-on-surface-variant hover:text-error transition-colors disabled:opacity-60"
-            >
-              Remove photo
-            </button>
-          )}
-        </div>
-        <div className="hidden md:block opacity-10 mt-4 px-8 pointer-events-none">
-          <span className="material-symbols-outlined text-[120px]">local_florist</span>
-        </div>
-      </aside>
+              placeholder="you@example.com"
+              disabled={busy}
+              aria-invalid={emailError ? 'true' : undefined}
+              aria-describedby={emailError ? 'edit-email-error' : undefined}
+            />
+            {emailError && (
+              <p id="edit-email-error" className="edit-field-hint" role="alert">
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  error
+                </span>
+                {emailError}
+              </p>
+            )}
+          </div>
 
-      <section className="w-full md:w-3/4 flex flex-col gap-8 md:gap-12">
-        <form
-          onSubmit={handleSavePersonalClick}
-          className="bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(44,44,44,0.05)] border border-outline-variant/20 relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 opacity-5 -mr-8 -mt-8 pointer-events-none">
-            <span className="material-symbols-outlined text-[180px]">fluid_med</span>
-          </div>
-          <h3 className="font-headline-lg text-3xl md:text-4xl text-primary mb-8 relative z-10">
-            Personal Information
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10">
-            <div className="flex flex-col gap-2 md:col-span-2">
-              <label className={labelClass} htmlFor="edit-full-name">
-                Full name
-              </label>
-              <input
-                id="edit-full-name"
-                className={fieldClass}
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                required
-                maxLength={80}
-                disabled={busy}
-              />
-            </div>
-            <div className="flex flex-col gap-2 md:col-span-2">
-              <label className={labelClass} htmlFor="edit-email">
-                Email
-              </label>
-              <input
-                id="edit-email"
-                className={fieldClass}
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                disabled={busy}
-              />
-            </div>
-          </div>
-          {personalError && (
-            <p className="mt-6 text-error font-body-md text-sm bg-error-container/30 rounded-full py-2 px-4 text-center relative z-10">
-              {personalError}
+          {personalError && <p className="edit-form-error">{personalError}</p>}
+          {personalSuccess && (
+            <p className="edit-form-success" role="status">
+              <span className="material-symbols-outlined">check_circle</span> {t('Save successful')}
             </p>
           )}
-          <div className="mt-10 flex justify-end relative z-10">
-            <button
-              type="submit"
-              disabled={personalSubmitting}
-              className="bg-primary text-on-primary px-10 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-shadow disabled:opacity-60"
-            >
-              {personalSubmitting ? 'Saving…' : 'Save Changes'}
+
+          <div className="edit-form-actions">
+            <button type="submit" className="btn-edit-save" disabled={personalSubmitting}>
+              {personalSubmitting ? t('Saving…') : t('Save Changes')}
             </button>
           </div>
         </form>
 
-        <div className="bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0px_4px_20px_rgba(44,44,44,0.05)] border border-outline-variant/20">
-          <h3 className="font-headline-lg text-3xl md:text-4xl text-primary mb-8">Security</h3>
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between py-4 border-b border-outline-variant/20 gap-4">
-              <div>
-                <p className="font-body-lg font-bold">Password</p>
-                <p className="text-on-surface-variant text-sm">Update your account password</p>
-              </div>
-              {!passwordOpen && (
-                <button
-                  type="button"
-                  disabled={busy}
-                  onClick={() => setPasswordOpen(true)}
-                  className="text-primary font-medium hover:underline shrink-0"
-                >
-                  Change Password
-                </button>
-              )}
+        <div className="edit-form-card">
+          <span className="material-symbols-outlined edit-form-watermark">lock</span>
+          <h2 className="edit-form-title">{t('Security')}</h2>
+
+          <div className="edit-security-row">
+            <div>
+              <p className="edit-security-title">{t('Password')}</p>
+              <p className="edit-security-sub">{t('Update your account password')}</p>
             </div>
-            {passwordOpen && (
-              <form onSubmit={handleSavePasswordClick} className="space-y-4 pt-2">
-                <PasswordField
-                  id="edit-current-password"
-                  label="Current password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  disabled={passwordSubmitting}
-                  autoComplete="current-password"
-                />
-                <PasswordField
-                  id="edit-new-password"
-                  label="New password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  disabled={passwordSubmitting}
-                  autoComplete="new-password"
-                  minLength={8}
-                />
-                <PasswordField
-                  id="edit-confirm-password"
-                  label="Confirm new password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  disabled={passwordSubmitting}
-                  autoComplete="new-password"
-                />
-                {passwordError && (
-                  <p className="text-error font-body-md text-sm bg-error-container/30 rounded-full py-2 px-4 text-center">
-                    {passwordError}
-                  </p>
-                )}
-                <div className="flex flex-wrap gap-3 justify-end pt-2">
-                  <button
-                    type="button"
-                    disabled={passwordSubmitting}
-                    onClick={() => {
-                      setPasswordOpen(false)
-                      setCurrentPassword('')
-                      setNewPassword('')
-                      setConfirmPassword('')
-                    }}
-                    className="px-6 py-2.5 rounded-full border border-outline-variant text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={passwordSubmitting}
-                    className="bg-primary text-on-primary px-8 py-2.5 rounded-full font-medium shadow-md hover:shadow-lg transition-shadow disabled:opacity-60"
-                  >
-                    {passwordSubmitting ? 'Updating…' : 'Update Password'}
-                  </button>
-                </div>
-              </form>
+            {!passwordOpen && (
+              <button
+                type="button"
+                className="btn-edit-text"
+                disabled={busy}
+                onClick={() => setPasswordOpen(true)}
+              >
+                {t('Change Password')}
+              </button>
             )}
           </div>
+
+          {passwordOpen && (
+            <form className="edit-password-form" onSubmit={handleSavePasswordClick}>
+              <EditPasswordField
+                id="edit-current-password"
+                label="Current password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                disabled={passwordSubmitting}
+                autoComplete="current-password"
+              />
+              <EditPasswordField
+                id="edit-new-password"
+                label="New password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                disabled={passwordSubmitting}
+                autoComplete="new-password"
+                minLength={8}
+              />
+              <EditPasswordField
+                id="edit-confirm-password"
+                label="Confirm new password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled={passwordSubmitting}
+                autoComplete="new-password"
+              />
+
+              {passwordError && <p className="edit-form-error">{passwordError}</p>}
+
+              <div className="edit-password-actions">
+                <button
+                  type="button"
+                  className="btn-edit-outline"
+                  disabled={passwordSubmitting}
+                  onClick={closePasswordForm}
+                >
+                  {t('Cancel')}
+                </button>
+                <button type="submit" className="btn-edit-save" disabled={passwordSubmitting}>
+                  {passwordSubmitting ? t('Updating…') : t('Update Password')}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
-      </section>
+      </div>
     </div>
   )
 }

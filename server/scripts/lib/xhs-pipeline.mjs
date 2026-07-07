@@ -8,30 +8,18 @@
  * - mergePosts … dedupe by platform + id
  */
 
-const STATE_FROM_KEYWORD = [
-  { pattern: /槟城|penang/i, state: 'Penang' },
-  { pattern: /吉隆坡|kuala\s*lumpur|kl/i, state: 'Kuala Lumpur' },
-  { pattern: /兰卡威|langkawi/i, state: 'Kedah' },
-  { pattern: /马六甲|melaka|malacca/i, state: 'Melaka' },
-  { pattern: /柔佛|johor|新山/i, state: 'Johor' },
-  { pattern: /沙巴|sabah|亚庇|仙本那|kundasang|昆达山|kinabalu|神山|kota\s*kinabalu|\bkk\b/i, state: 'Sabah' },
-  { pattern: /砂拉越|sarawak|古晋/i, state: 'Sarawak' },
-  { pattern: /登嘉楼|terengganu/i, state: 'Terengganu' },
-  { pattern: /吉兰丹|kelantan/i, state: 'Kelantan' },
-  { pattern: /彭亨|pahang|金马伦|cameron/i, state: 'Pahang' },
-  { pattern: /霹雳|perak|怡保|ipoh/i, state: 'Perak' },
-  { pattern: /森美兰|negeri\s*sembilan/i, state: 'Negeri Sembilan' },
-  { pattern: /玻璃市|perlis/i, state: 'Perlis' },
-  { pattern: /雪兰莪|selangor/i, state: 'Selangor' },
-  { pattern: /马来西亚|malaysia/i, state: 'Malaysia' },
-]
+import { inferStateScored } from './infer-state.mjs'
 
 const CATEGORY_RULES = [
-  { id: 'FOOD', pattern: /美食|吃|餐厅|咖啡|小吃|food|culinary|restaurant|cafe|夜市/i },
-  { id: 'NATURE', pattern: /自然|山|海|森林|沙滩|徒步|nature|beach|hike|公园/i },
-  { id: 'CULTURE', pattern: /文化|博物馆|历史|艺术|传统|culture|museum|heritage|娘惹/i },
-  { id: 'HIDDEN GEMS', pattern: /小众|隐藏|秘境|hidden|gem|打卡|秘境/i },
+  { id: 'FOOD', pattern: /美食|必吃|好吃|foodie|makan|餐厅推荐|大马美食|culinary|restaurant|cafe|coffee|小吃|夜市|肉骨|laksa|satay/i },
+  { id: 'NATURE', pattern: /自然|沙滩|beach|waterfall|森林|forest|徒步|hike|national\s+park|pantai|gunung|海岛|island/i },
+  { id: 'CULTURE', pattern: /文化|博物馆|历史|艺术|传统|culture|museum|heritage|娘惹|mosque|temple/i },
+  { id: 'HIDDEN GEMS', pattern: /小众|隐藏|秘境|hidden\s+gem|underrated|off.?beat/i },
+  { id: 'ADVENTURE', pattern: /冒险|adventure|diving|snorkel|rafting|zipline|camping|glamping|atv|theme\s+park/i },
 ]
+
+const PHOTO_SPOT_RE = /拍照|摄影|机位|photo\s*spot|viewpoint|闪电|日落|夜景|延时|lightning|sunset|sunrise/i
+const FOOD_INTENT_RE = /美食|必吃|foodie|makan|餐厅推荐|好吃|大马美食|restaurant\s+review|开盲盒.*娘惹|开盲盒.*美食/i
 
 export function getField(row, name) {
   if (row[name] != null && row[name] !== '') return row[name]
@@ -81,21 +69,25 @@ export function formatLikes(value) {
   return `🔥 ${raw} likes`
 }
 
-export function inferState({ sourceKeyword, ipLocation, batchLabel, title, description }) {
-  const text = `${sourceKeyword || ''} ${ipLocation || ''} ${title || ''} ${description || ''}`
-  for (const { pattern, state } of STATE_FROM_KEYWORD) {
-    if (pattern.test(text)) return state
-  }
-  if (batchLabel === 'penang') return 'Penang'
-  if (batchLabel === 'sabah') return 'Sabah'
-  if (batchLabel === 'sarawak') return 'Sarawak'
-  if (batchLabel === 'malaysia') return 'Malaysia'
-  return 'Malaysia'
+export function inferState({ sourceKeyword, ipLocation, batchLabel, title, description, location }) {
+  return inferStateScored({
+    sourceKeyword,
+    location: location || ipLocation,
+    title,
+    description,
+    batchLabel,
+  })
 }
 
 export function inferCategories({ title, description, tagList }) {
   const text = `${title} ${description} ${tagList}`
-  const matched = CATEGORY_RULES.filter(({ pattern }) => pattern.test(text)).map((r) => r.id)
+  const photoSpot = PHOTO_SPOT_RE.test(text)
+  const foodIntent = FOOD_INTENT_RE.test(text)
+  const matched = CATEGORY_RULES.filter(({ id, pattern }) => {
+    if (id === 'FOOD' && photoSpot && !foodIntent) return false
+    if (id === 'FOOD' && /餐厅/.test(text) && photoSpot && !foodIntent) return false
+    return pattern.test(text)
+  }).map((r) => r.id)
   return matched.length ? [...new Set(matched)] : ['CULTURE']
 }
 

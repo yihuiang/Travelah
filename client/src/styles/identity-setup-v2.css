@@ -1,0 +1,393 @@
+.identity-setup-v2 .identity-page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 104;
+  background:
+    linear-gradient(rgba(26, 20, 16, 0.35), rgba(26, 20, 16, 0.35)),
+    url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1400&q=80')
+      center / cover no-repeat;
+  filter: blur(2px);
+}
+
+.identity-setup-v2 .identity-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(26, 20, 16, 0.45);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.identity-setup-v2 .identity-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+.identity-setup-v2 .identity-modal {
+  background: #faf5f0;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 480px;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(26, 20, 16, 0.2);
+  overflow: visible;
+  flex-shrink: 0;
+  margin: auto;
+}
+
+.identity-setup-v2 .identity-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f3eae4;
+  border: 1.5px solid #e8c4b4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b5c54;
+  transition: all 0.2s;
+}
+
+.identity-setup-v2 .identity-modal-close:hover {
+  background: transparent;
+  border-color: #b84a2e;
+  color: #b84a2e;
+}
+
+.identity-setup-v2 .identity-modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.identity-setup-v2 .identity-modal-logo {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 26px;
+  color: #b84a2e;
+  letter-spacing: -0.5px;
+}
+
+.identity-setup-v2 .identity-modal-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 8px;
+}
+
+.identity-setup-v2 .identity-modal-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c8e63a;
+}
+
+.identity-setup-v2 .identity-modal-eyebrow-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b84a2e;
+}
+
+.identity-setup-v2 .identity-modal-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 26px;
+  color: #1a1410;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.identity-setup-v2 .identity-modal-title em {
+  color: #b84a2e;
+  font-style: italic;
+}
+
+.identity-setup-v2 .identity-modal-sub {
+  font-size: 13px;
+  color: #6b5c54;
+  line-height: 1.5;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.identity-setup-v2 .identity-card {
+  background: #fff;
+  border: 1.5px solid #e8c4b4;
+  border-radius: 20px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.identity-setup-v2 .identity-card-watermark {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  font-size: 110px;
+  color: #b84a2e;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.identity-setup-v2 .identity-card-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 20px;
+  color: #1a1410;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.identity-setup-v2 .identity-card-sub {
+  font-size: 12px;
+  color: #6b5c54;
+  margin-bottom: 16px;
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+
+.identity-setup-v2 .identity-option-group {
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.identity-setup-v2 .identity-option-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.identity-setup-v2 .identity-option-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b5c54;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.identity-setup-v2 .identity-option-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.identity-setup-v2 .identity-option-chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1.5px solid #e8c4b4;
+  background: transparent;
+  color: #6b5c54;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+}
+
+.identity-setup-v2 .identity-option-chip:hover {
+  border-color: #b84a2e;
+  color: #b84a2e;
+}
+
+.identity-setup-v2 .identity-option-chip.active {
+  background: #b84a2e;
+  border-color: #b84a2e;
+  color: #fff;
+}
+
+.identity-setup-v2 .identity-form-error {
+  display: none;
+  font-size: 13px;
+  color: #ba1a1a;
+  background: #ffdad6;
+  border-radius: 100px;
+  padding: 10px 18px;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.identity-setup-v2 .identity-form-error.show {
+  display: block;
+}
+
+.identity-setup-v2 .identity-btn-save {
+  width: 100%;
+  padding: 13px;
+  border-radius: 100px;
+  border: none;
+  background: #b84a2e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 18px;
+  transition: background 0.2s, transform 0.15s;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.identity-setup-v2 .identity-btn-save:hover:not(:disabled) {
+  background: #1a1410;
+  transform: translateY(-1px);
+}
+
+.identity-setup-v2 .identity-btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.identity-setup-v2 .identity-btn-skip {
+  width: 100%;
+  padding: 8px;
+  border-radius: 100px;
+  border: none;
+  background: none;
+  color: #6b5c54;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 6px;
+  transition: color 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.identity-setup-v2 .identity-btn-skip:hover {
+  color: #b84a2e;
+}
+
+.identity-setup-v2 .identity-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  animation: identity-v2-spin 0.7s linear infinite;
+  display: none;
+}
+
+.identity-setup-v2 .identity-btn-save.loading .identity-spinner {
+  display: inline-block;
+}
+
+@keyframes identity-v2-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.identity-setup-v2 .identity-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(26, 20, 16, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.identity-setup-v2 .identity-success-card {
+  background: #fff;
+  border: 1.5px solid #e8c4b4;
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(26, 20, 16, 0.2);
+}
+
+.identity-setup-v2 .identity-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #b84a2e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.identity-setup-v2 .identity-success-icon .material-symbols-outlined {
+  font-size: 32px;
+}
+
+.identity-setup-v2 .identity-success-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 26px;
+  margin-bottom: 8px;
+  color: #1a1410;
+}
+
+.identity-setup-v2 .identity-success-title em {
+  color: #b84a2e;
+  font-style: italic;
+}
+
+.identity-setup-v2 .identity-success-sub {
+  font-size: 14px;
+  color: #6b5c54;
+  margin-bottom: 28px;
+  line-height: 1.55;
+}
+
+.identity-setup-v2 .identity-btn-discover {
+  width: 100%;
+  padding: 14px;
+  border-radius: 100px;
+  border: none;
+  background: #b84a2e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.identity-setup-v2 .identity-btn-discover:hover {
+  background: #1a1410;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .identity-setup-v2 .identity-modal {
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .identity-setup-v2 .identity-card {
+    padding: 22px;
+  }
+}
